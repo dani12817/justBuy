@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <head>
+        <link rel="stylesheet" type="text/css" href="resources/css/style.css"/>
+    </head>
+    <ui:composition template="/plantilla.xhtml">
+        <ui:define name="body">
+            <div class="cuentaInfo-container">
+                <div class="cuentaInfoDiv">       
+
+                    <ui:include src="/mainPages/infoCuenta/cuentaInfoMenuIzquierdo.xhtml"/>
+
+                    <div class="cuentaInfoRight">
+                        <div class="cuentaPedidoForm">
+                            <h1 class="cuentaInfoFormTitle">Pedidos</h1>
+                            <p>Información del Pedido ##{pedidoController.pedidoSeleccionado.idpedido}</p>
+                        </div>
+
+                        <div class="cuentaPedido">
+                            <div class="cuentaPedidoItem">
+                                <label class="labelPedidoItem">##{pedidoController.pedidoSeleccionado.idpedido} [Tienda: #{pedidoController.pedidoSeleccionado.tienda.nombre}]</label>
+                                <label class="labelPedidoItem" style="text-align: right;">Fecha: #{pedidoController.pedidoSeleccionado.fechaConFormato}</label>
+                                <div class="cuentaPedidoItemDatosVer">
+                                    #{pedidoController.pedidoSeleccionado.informacion}
+                                </div>
+                                <div class="cuentaPedidoItemTotal">
+                                    #{pedidoController.pedidoSeleccionado.total}€
+                                </div>
+                                <div class="cuentaPedidoItemEstado">
+                                    #{pedidoController.getEstadoPedido(pedidoController.pedidoSeleccionado.estado)}
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="cuentaInfoFormTitle">Productos del Pedido</h3>
+                                <ui:repeat value="#{pedidoController.productosPedido}" var="productosPedido">
+                                    <div class="verPedidoItem">
+                                        <div class="verPedidoLogo">
+                                            <img class="logoVerPedido" src="data:image/jpeg;base64,#{productoController.getAvatarImage(productosPedido.producto.imagen)}"/>
+                                        </div>
+                                        <div class="verPedidoDatos">
+                                            #{productosPedido.producto.nombre}<br />
+                                            #{productosPedido.producto.precio}€ - Cantidad: #{productosPedido.producto.cantidad}<br />
+                                            #{productosPedido.producto.descripcion}<br />
+                                        </div>
+                                    </div>
+                                </ui:repeat>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

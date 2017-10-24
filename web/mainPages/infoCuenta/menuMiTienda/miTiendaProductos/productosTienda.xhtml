@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <head>
+        <link rel="stylesheet" type="text/css" href="resources/css/style.css"/>
+    </head>
+    <ui:composition template="/plantilla.xhtml">
+        <ui:define name="body">
+            <div class="cuentaInfo-container">
+                <div class="cuentaInfoDiv">       
+
+                    <ui:include src="/mainPages/infoCuenta/cuentaInfoMenuIzquierdo.xhtml"/>
+
+                    <div class="cuentaInfoRight">
+                        <div class="miTiendaProductosForm">
+                            <h1 class="miTiendaProductosFormTitle">Lista de productos</h1>
+                            <p>Crea y guarda productos de tu tienda.</p>
+                        </div>
+
+                        <h:panelGroup rendered="#{!productoController.isTiendaConProductos(tiendaController.miTienda)}">
+                            <div class="miTiendaProductos">
+                                <div class="miTiendaProductosItem">
+                                    <label class="noHayElemntosMensaje">Actualmente no se ha creado ningún producto</label>
+                                </div>
+                            </div>
+                        </h:panelGroup>
+
+                        <h:panelGroup rendered="#{productoController.isTiendaConProductos(tiendaController.miTienda)}">
+                            <div class="miTiendaProductosItemDatos">
+                                <div class="tiendaLogoProductoLabel">
+
+                                </div>
+                                <div class="tiendaNombreProductoNombre">
+                                    Nombre
+                                </div>
+                                <div class="tiendaNombreProductoOtros labelCenter">
+                                    Precio
+                                </div>
+                                <div class="tiendaNombreProductoOtros labelCenter">
+                                    Cantidad
+                                </div>
+                                <div class="tiendaNombreProductoOtros labelCenter">
+                                    Categoria
+                                </div>
+                            </div>
+
+                            <ui:repeat value="#{productoController.listaProductosTienda}" var="producto">
+                                <div class="miTiendaProductos">
+                                    <div class="miTiendaProductosItem">
+                                        <div class="miTiendaProductosItemDatos">
+                                            <div class="tiendaLogoProducto">
+                                                <img class="productoLogo" src="data:image/jpeg;base64,#{productoController.getAvatarImage(producto.imagen)}" width="60px"/>
+                                            </div>
+                                            <div class="tiendaNombreProductoNombre">
+                                                #{producto.nombre}
+                                            </div>
+                                            <div class="tiendaNombreProductoOtros labelCenter">
+                                                #{producto.precio}€
+                                            </div>
+                                            <div class="tiendaNombreProductoOtros labelCenter">
+                                                #{producto.cantidad}
+                                            </div>
+                                            <div class="tiendaNombreProductoOtros labelCenter">
+                                                #{producto.categoria.nombre}
+                                            </div>
+                                        </div>
+                                        <div class="miTiendaProductosItemAcciones">
+                                            <h:form id="AddressListItem">
+                                                <h:commandButton image="/justBuy-danielLealPerez/javax.faces.resource/edit.png.xhtml?ln=images" action="#{productoController.cargarProdcuto(false,producto)}"/>
+                                                <h:commandButton image="/justBuy-danielLealPerez/javax.faces.resource/delete.png.xhtml?ln=images" action="#{productoController.facade.remove(producto)}"/>
+                                            </h:form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ui:repeat>
+                        </h:panelGroup>
+
+                        <div class="miTiendaProductosAdd">
+                            <div class="miTiendaProductosAddNueva">
+                                <h:form id="AddressNewItem">
+                                    <h:commandButton image="/justBuy-danielLealPerez/javax.faces.resource/producto-new.png.xhtml?ln=images" action="#{productoController.cargarProdcuto(true,null)}"/>
+                                    <br />Añadir Producto
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

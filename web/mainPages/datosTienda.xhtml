@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <head>
+        <link rel="stylesheet" type="text/css" href="resources/css/style.css"/>
+    </head>
+    <ui:composition template="/plantilla.xhtml">
+        <ui:define name="body">
+
+            <h:panelGroup rendered="#{productoController.envioElegido == null}">
+                #{productoController.setEnvioElegido(envioController.facade.findUnEnvioPorTienda(tiendaController.tiendaSeleccionada))}
+            </h:panelGroup>
+
+            <div class="tienda-result-container">
+                <div class="datos-tienda-result-container">
+                    <ui:include src="/mainPages/menusDatosTienda/menuSuperior.xhtml"/>
+                </div>
+
+                <li class="body-tienda-result-container">		
+                    <ui:include src="/mainPages/menusDatosTienda/categoriaTienda.xhtml"/> 
+
+                    <div class="tienda-result-container-middle">
+                        <ul class="tienda-data-menu">
+                            <li class="tienda-data-menu-item selectedTiendaDataList"><span>Info</span></li>
+                            <li class="tienda-data-menu-item"><a href="productosTienda.xhtml">Productos</a></li>
+                            <li class="tienda-data-menu-item"><a href="opinionesTienda.xhtml">Opiniones</a></li>
+                        </ul>					
+                        <div class="tienda-data-info">
+                            <p style="font-weight: bold;">Más sobre #{tiendaController.tiendaSeleccionada.nombre}</p>
+                            <p>#{tiendaController.tiendaSeleccionada.descripcion}</p>
+
+                            <h:inputText id="Lalitud" style="visibility: hidden" value="#{tiendaController.tiendaSeleccionada.latitud}"/>
+                            <h:inputText id="Longitud" style="visibility: hidden" value="#{tiendaController.tiendaSeleccionada.longitud}"/>
+                            <div id="googleMap" style="width:97.5%;height:300px;"></div>
+                            <script language="javascript" type="text/javascript">
+                                var currentMaker;
+
+                                function showMap() {
+                                    var numLat = parseFloat(document.getElementById('Lalitud').value);
+                                    var numLon = parseFloat(document.getElementById('Longitud').value);
+
+                                    var LatLngDeTienda = {lat: numLat, lng: numLon};
+
+                                    var mapProp = {center: LatLngDeTienda, zoom: 14};
+                                    var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+
+                                    currentMaker = new google.maps.Marker({
+                                        position: LatLngDeTienda,
+                                        map: mapProp,
+                                        title: document.getElementById('tiendaSeleccionadaName').innerHTML
+                                    });
+
+                                    // Añadir marcador de Tienda
+                                    currentMaker.setMap(map);
+                                }
+                            </script>
+
+                            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQqmkypDVJy_NTSKOmLsoEXMsKcffhKuw&amp;callback=showMap"></script>
+
+
+                            <p>#{tiendaController.tiendaSeleccionada.direccionLinea1}</p>
+                            <p>#{tiendaController.tiendaSeleccionada.direccionLinea2}</p>
+                            <p style="font-weight: bold;text-align:center;">[HORARIO]</p>
+                            <table align="center">
+                                <tr>
+                                    <td class="titleDay">Lunes</td><td>#{horariotiendaController.horarioTiendaSelect.lunes.replaceAll("-", " - ")}</td>
+                                </tr>
+                                <tr>
+                                    <td class="titleDay">Martes</td><td>#{horariotiendaController.horarioTiendaSelect.martes.replaceAll("-", " - ")}</td>
+                                </tr>
+                                <tr>
+                                    <td class="titleDay">Miércoles</td><td>#{horariotiendaController.horarioTiendaSelect.miercoles.replaceAll("-", " - ")}</td>
+                                </tr>
+                                <tr>
+                                    <td class="titleDay">Jueves</td><td>#{horariotiendaController.horarioTiendaSelect.jueves.replaceAll("-", " - ")}</td>
+                                </tr>
+                                <tr>
+                                    <td class="titleDay">Viernes</td><td>#{horariotiendaController.horarioTiendaSelect.viernes.replaceAll("-", " - ")}</td>
+                                </tr>
+                                <tr>
+                                    <td class="titleDay">Sábado</td><td>#{horariotiendaController.horarioTiendaSelect.sabado.replaceAll("-", " - ")}</td>
+                                </tr>
+                                <tr>
+                                    <td class="titleDay">Domingo</td><td>#{horariotiendaController.horarioTiendaSelect.domingo.replaceAll("-", " - ")}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <ui:include src="/mainPages/menusDatosTienda/carritoMenu.xhtml"/>   
+
+                </li>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

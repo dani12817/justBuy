@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <link rel="stylesheet" type="text/css" href="resources/css/style.css"/>
+    </head>
+    <ui:composition template="/plantilla.xhtml">
+        <ui:define name="body">
+            <div class="tienda-result-container">
+                <div class="datos-tienda-result-container">
+                    <div class="tienda-datos-container-left">
+                        <img style="padding-right: 10px" src="data:image/jpeg;base64,#{tiendaController.getAvatarImage(tiendaController.tiendaSeleccionada.logo)}" width="100px"/>
+                    </div>
+                    <div class="tienda-datos-container-middle">
+                        <label id="tiendaSeleccionadaName">#{tiendaController.tiendaSeleccionada.nombre}</label> <br />
+                        <p:rating value="#{valoracionController.getMediaDeValoracion(tiendaController.tiendaSeleccionada)}" readonly="true" stars="6"/><br />
+                        #{categoriasdetiendaController.facade.find2CategoriasPorTienda(tiendaController.tiendaSeleccionada)}
+                    </div>
+                    <div class="tienda-datos-container-right">
+                        <table>
+                            <tr>
+                                <td><h:graphicImage library="images" name="cesta-icon.PNG"/></td>
+                                <td>Para recoger</td>
+                                <td style="padding-left:10px;"><h:graphicImage library="images" name="envio-icon.PNG"/></td>
+                                <td>Coste de entrega: #{envioController.facade.findUnEnvioPorTienda(tiendaController.tiendaSeleccionada)}€</td>
+                                <td style="padding-left:10px;"><h:graphicImage library="images" name="write_message.png"/></td>
+                                <td>Enviar Mensaje</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <li class="body-tienda-result-container">
+                    <div class="tienda-result-container-middle">	
+                        <div class="tienda-data-info">
+                            <h:form id="nuevoMensaje">
+                                <div class="cuentaInfoFormLabel">Asunto</div>
+                                <h:inputText id="asuntoForm" value="#{mensajeController.mensajeActual.asunto}" maxlength="50" size="5" required="true"/>
+
+                                <div class="cuentaInfoFormLabel">Producto Relacionado</div>
+                                <h:selectOneMenu value="#{mensajeController.productoDelMensaje}" required="true">
+                                    <f:selectItem itemValue="Sin Producto" value="#{null}"/>
+                                    <f:selectItems value="#{productoController.montarlistaProdcutosTienda(tiendaController.tiendaSeleccionada)}" />
+                                </h:selectOneMenu>
+
+                                <div class="cuentaInfoFormLabel">Texto del Mensaje</div>
+                                <h:inputTextarea value="#{mensajeController.mensajeActual.mensaje}" rows="10" cols="52" required="true"/><br />
+                                <br />
+
+                                <h:commandButton id="mensajeNuevoButton" value="Enviar Mensaje" action="#{mensajeController.enviarMensaje(usuarioController.usuarioLogin,tiendaController.tiendaSeleccionada.usuario)}"/>
+                            </h:form>
+                        </div>
+                    </div>				
+                </li>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

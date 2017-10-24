@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <h:head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8"></meta>
+        <title><ui:insert name="title">Just Buy</ui:insert></title>
+        <h:outputStylesheet library="css" name="style.css"/>
+        <link rel="icon" type="image/x-icon" href="/justBuy-danielLealPerez/javax.faces.resource/icon-justBuy.ico.xhtml?ln=images"/>
+    </h:head>
+
+    <h:body>
+
+        <div class="header">
+            <div class="header-container">
+                <div class="logo">
+                    <a href="#{request.contextPath}/indexMain.xhtml">
+                        <h:graphicImage library="images" name="je-logo-v2.png" width="152" height="30"/>
+                    </a>
+                </div>
+
+                <div class="nav-container">
+                    <ul class="nav-list">
+                        <c:choose>
+                            <c:when test='#{usuarioController.usuarioLogin != null}'>
+                                <li class="nav-item">
+                                    <a class="nav-item-link" href="#{request.contextPath}/mainPages/infoCuenta/cuentaInfo.xhtml">Hola, #{usuarioController.usuarioLogin.nombre}</a>
+                                </li>
+                                <li class="nav-item">
+                                    <h:form id="cerraSesion">
+                                        <h:commandLink class="nav-item-link" action="#{usuarioController.cerrarSesion()}" value="Cerrar Sesión"/>
+                                    </h:form>
+                                </li>
+                                <c:if test='#{usuarioController.usuarioLogin.nick.equals("admin")}'>
+                                    <li class="nav-item">
+                                        <a class="nav-item-link" href="#{request.contextPath}/index.xhtml">Admin</a>
+                                    </li>
+                                </c:if>
+                            </c:when>
+                            <c:when test='#{usuarioController.usuarioLogin == null}'>
+                                <li class="nav-item">
+                                    <a class="nav-item-link" href="#{request.contextPath}/mainPages/iniciarSesion.xhtml">Inicia sesión</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-item-link" href="#{request.contextPath}/mainPages/registroUsuario.xhtml">Regístrate</a>
+                                </li>
+                            </c:when>
+                        </c:choose>
+                        <li class="nav-item">
+                            <a class="nav-item-link" href="">Ayuda</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <br /><br /><br />
+
+        <div class="red-separator"></div>
+
+        <div id="content">
+            <ui:insert name="body">Default Body</ui:insert>
+        </div>
+
+    </h:body>
+
+</html>

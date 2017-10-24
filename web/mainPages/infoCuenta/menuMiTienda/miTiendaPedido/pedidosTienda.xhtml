@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <head>
+        <link rel="stylesheet" type="text/css" href="resources/css/style.css"/>
+    </head>
+    <ui:composition template="/plantilla.xhtml">
+        <ui:define name="body">
+            <div class="cuentaInfo-container">
+                <div class="cuentaInfoDiv">       
+
+                    <ui:include src="/mainPages/infoCuenta/cuentaInfoMenuIzquierdo.xhtml"/>
+
+                    <div class="cuentaInfoRight">
+                        <div class="cuentaPedidoForm">
+                            <h1 class="cuentaInfoFormTitle">Pedidos</h1>
+                            <p>Ver el histórico de pedidos</p>
+                        </div>				
+
+                        <h:panelGroup rendered="#{pedidoController.isListaPedidosVaciaTienda(tiendaController.miTienda)}">
+                            <div class="cuentaPedido">
+                                <div class="cuentaPedidoItem">
+                                    <label class="noHayElemntosMensaje">Actualmente no se ha realizado ningún pedido relacionada con tu tienda.</label>
+                                </div>
+                            </div>
+                        </h:panelGroup>	
+
+                        <ui:repeat value="#{pedidoController.listaPedidos}" var="pedido">
+                            <div class="cuentaPedido">
+                                <div class="cuentaPedidoItem">
+                                    <label class="labelPedidoItem">##{pedido.idpedido} [Usuario: #{pedido.usuario.nick}]</label>
+                                    <label class="labelPedidoItem" style="text-align: right;">Fecha: #{pedido.fechaConFormato}</label>
+                                    <div class="cuentaPedidoItemDatos">
+                                        #{pedidoController.separarInformacion(pedido.informacion)}
+                                    </div>
+                                    <div class="cuentaPedidoItemTotal">
+                                        #{pedido.total}€
+                                    </div>
+                                    <div class="cuentaPedidoItemEstado">
+                                        #{pedidoController.getEstadoPedido(pedido.estado)}
+                                    </div>
+                                    <div class="cuentaPedidoItemAcciones">
+                                        <h:form>
+                                            <h:panelGroup rendered="#{pedido.estado == 1 and !pedidoController.recogidaEnTienda(pedido.informacion)}">
+                                                <h:commandButton id="enviadoPedidoButtonEnviado" value="Marcar Como 'Enviado'" action="#{pedidoController.setEstadoPedido(pedido,2)}"/>
+                                            </h:panelGroup>
+                                            <h:panelGroup rendered="#{pedido.estado == 1 and pedidoController.recogidaEnTienda(pedido.informacion)}">
+                                                <h:commandButton id="enviadoPedidoButtonRecoger" value="Marcar Como 'Listo Para Recoger en Tienda'" action="#{pedidoController.setEstadoPedido(pedido,3)}"/>
+                                            </h:panelGroup>
+                                            <h:commandButton id="verPedidoButton" value="Ver Pedido" action="#{pedidoController.cargarPedidoTienda(pedido,lineapedidoController)}"/>           
+                                            <h:commandButton id="enviarMensajePedidoButton" value="Enviar Mensaje" action="#{mensajeController.prepararMensajePedido()}"/>
+                                        </h:form>   
+                                    </div>
+                                </div>
+                            </div>
+                        </ui:repeat>
+
+                    </div>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

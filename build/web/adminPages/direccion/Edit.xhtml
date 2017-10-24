@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditDireccionTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditDireccionLabel_iddireccion}" for="iddireccion" />
+                    <h:inputText id="iddireccion" value="#{direccionController.selected.iddireccion}" title="#{bundle.EditDireccionTitle_iddireccion}" required="true" requiredMessage="#{bundle.EditDireccionRequiredMessage_iddireccion}"/>
+                    <h:outputLabel value="#{bundle.EditDireccionLabel_nombre}" for="nombre" />
+                    <h:inputText id="nombre" value="#{direccionController.selected.nombre}" title="#{bundle.EditDireccionTitle_nombre}" required="true" requiredMessage="#{bundle.EditDireccionRequiredMessage_nombre}"/>
+                    <h:outputLabel value="#{bundle.EditDireccionLabel_direccionLinea1}" for="direccionLinea1" />
+                    <h:inputText id="direccionLinea1" value="#{direccionController.selected.direccionLinea1}" title="#{bundle.EditDireccionTitle_direccionLinea1}" required="true" requiredMessage="#{bundle.EditDireccionRequiredMessage_direccionLinea1}"/>
+                    <h:outputLabel value="#{bundle.EditDireccionLabel_direccionLinea2}" for="direccionLinea2" />
+                    <h:inputText id="direccionLinea2" value="#{direccionController.selected.direccionLinea2}" title="#{bundle.EditDireccionTitle_direccionLinea2}" />
+                    <h:outputLabel value="#{bundle.EditDireccionLabel_codPostal}" for="codPostal" />
+                    <h:selectOneMenu id="codPostal" value="#{direccionController.selected.codPostal}" title="#{bundle.EditDireccionTitle_codPostal}" required="true" requiredMessage="#{bundle.EditDireccionRequiredMessage_codPostal}">
+                        <f:selectItems value="#{codpostalController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditDireccionLabel_usuario}" for="usuario" />
+                    <h:selectOneMenu id="usuario" value="#{direccionController.selected.usuario}" title="#{bundle.EditDireccionTitle_usuario}" required="true" requiredMessage="#{bundle.EditDireccionRequiredMessage_usuario}">
+                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{direccionController.update}" value="#{bundle.EditDireccionSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditDireccionViewLink}"/>
+                <br />
+                <h:commandLink action="#{direccionController.prepareList}" value="#{bundle.EditDireccionShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditDireccionIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

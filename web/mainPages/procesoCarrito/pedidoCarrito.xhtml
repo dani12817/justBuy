@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <head>
+        <link rel="stylesheet" type="text/css" href="resources/css/style.css"/>
+    </head>
+    <ui:composition template="/plantilla.xhtml">
+        <ui:define name="body">
+            <div class="cuentaInfo-container">
+                <div class="cuentaPedidoFormulario">
+                    <div class="cuentaPedidoProceso">
+                        <h:graphicImage library="images" name="proceso/procesoCarrito.png"/>
+                        <h:graphicImage library="images" name="proceso/arrow.png"/>
+                        <h:graphicImage library="images" name="proceso/procesoDireccionOFF.png"/>
+                        <h:graphicImage library="images" name="proceso/arrow.png"/>
+                        <h:graphicImage library="images" name="proceso/procesoEnvioOFF.png"/>
+                        <h:graphicImage library="images" name="proceso/arrow.png"/>
+                        <h:graphicImage library="images" name="proceso/procesoPagoOFF.png"/>
+                        <h:graphicImage library="images" name="proceso/arrow.png"/>
+                        <h:graphicImage library="images" name="proceso/procesoReviewOFF.png"/>
+                    </div>
+                    <div class="cuentaPedidoContenido">
+                        <div class="tituloProceso">
+                            <h2>Resumen del Pedido</h2>
+                        </div>
+                        <div class="tituloCamposPedido">
+                            <div class="imagenProducto"></div>
+                            <div class="datosProducto">Artículo</div>
+                            <div class="precioUnitarioProducto">Precio Unitario</div>
+                            <div class="cantidadProducto">Cantidad</div>
+                            <div class="precioTotalProducto">Total Producto</div>
+                        </div>
+                        <div class="productoPedido">
+                            <ui:repeat value="#{productoController.carritoDeLaCompra}" var="carritoDeLaCompra">
+                                <div class="productoItemPedido">
+                                    <div class="imagenProducto">
+                                        <img class="logoProductoCarrito" src="data:image/jpeg;base64,#{productoController.getAvatarImage(carritoDeLaCompra.prodcuto.imagen)}"/>
+                                    </div>
+                                    <div class="datosProducto">
+                                        <p>#{carritoDeLaCompra.prodcuto.nombre}</p>
+                                        <p>#{carritoDeLaCompra.prodcuto.descripcion}</p>
+                                    </div>
+                                    <div class="precioUnitarioProducto">#{carritoDeLaCompra.prodcuto.precio}€</div>
+                                    <div class="cantidadProducto">#{carritoDeLaCompra.cantidad}</div>
+                                    <div class="precioTotalProducto">#{carritoDeLaCompra.total}€</div>
+                                </div>
+                            </ui:repeat>
+
+                            <div class="subtotalDiv">
+                                <div class="posicionamientoSubtotal"></div>
+                                <div class="subtotalTextoDiv">
+                                    <div class="subtotalPedidoTexto">SUBTOTAL</div>
+                                    <div class="subtotalPedido">#{productoController.calcularTotalDelCarrito()}€</div>
+                                </div>
+                            </div>   
+                            <div class="subtotalDiv">
+                                <div class="posicionamientoSubtotal"></div>
+                                <div class="subtotalTextoDiv">
+                                    <div class="subtotalPedidoTexto">Envío</div>
+                                    <div class="subtotalPedido">#{productoController.envioElegido.precioEnvio}€</div>
+                                </div>
+                            </div>   
+                            <div class="subtotalDiv">
+                                <div class="posicionamientoSubtotal"></div>
+                                <div class="subtotalTextoDiv">
+                                    <div class="subtotalPedidoTexto">TOTAL</div>
+                                    <div class="subtotalPedido">#{productoController.totalDelCarrito}€</div>
+                                </div>
+                            </div>                         
+                        </div>
+                        <div>
+                            <div class="moverProcesoPedido">
+                                <h:form id="comandoNext">
+                                    <h:commandButton id="cuentaInfoButton" value="Empezar a Tramitar el Pedido" action="#{pedidoController.nextPedidoDireccion()}"/>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

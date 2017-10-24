@@ -1,0 +1,1565 @@
+/************************Global********************/
+
+body {
+    font-family: "Hind Vadodara",Helvetica,Arial,sans-serif;
+    font-size: 17px;
+    /*line-height: 1.6;*/
+    color: #535353;
+    margin:0;
+}
+
+
+a{
+    text-decoration: none;
+    color: #266abd;
+}
+
+a:visited{
+    text-decoration: none;
+}
+
+.red-separator{
+    border-top:solid;
+    border-top-color:red;
+}
+
+.logo {
+    height: 80px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width:170px;
+    height:70px;
+    float: left;
+}
+
+div.nav-container{
+    height: 70px;
+    /*width: 370px;
+    text-size-adjust: 100%;*/
+    float: right;
+    font-weight: bold;
+}
+
+ul.nav-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+li.nav-item {
+    height: 70px;
+    line-height: 40px;
+    text-align: center;
+    float: left;
+}
+
+li.nav-item a.nav-item-link {
+    display: inline-block;
+    color: #266abd;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li.nav-item a:hover {
+    text-decoration: underline;
+}
+
+.mensajeError{
+    color: red;
+}
+
+/************************index.html********************/
+.search-container{
+    margin-top:20px;
+    height: 100px;
+}
+
+.searchForm{	
+    height: 100px;
+    margin: 0 auto;
+    text-align: center;
+    width:600px;
+    line-height: 95px;
+}
+
+#search-form\:searchText{
+    height: 30px;
+    width: 70%;
+}
+
+#search-form\:searchButton{
+    height: 36px;
+    width: 19%;
+    background-color: #266abd;
+    border:none;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+/******************buscarTiendas*****************/
+.search-result-container{
+    /*width:80%;
+    padding-left:10%;*/
+    padding-top:20px;
+    /*float:left;*/
+}
+
+.contenedorResultadoBusqueda{	
+    text-align: center;
+}
+
+.search-result-title{
+    display: table;
+    margin: 0 auto;
+    text-align: left;
+}
+
+div.tienda-result, .search-categoria{
+    /*float:left;*/
+    /*border:solid;*/
+    display:inline-block;
+    vertical-align: top;
+    text-align: left;
+}
+.search-categoria{
+    padding: 20px 10px 10px 10px;
+    /*width:21%;*/
+    width:170px;
+    min-height:500px;
+}
+
+.tienda-result{	
+    /*padding:1%;
+    width:72%;*/
+}
+
+ul.list-category{
+    margin-top: 5px;
+    margin-left: 0;
+    padding: 0;
+    list-style: none;
+    list-style-image: none;
+}
+
+.category-all{
+    border-bottom: solid 1px #cacaca;
+}
+
+.search-result-title{
+    width:970px;
+}
+
+.search-title{
+    font-weight: bold;
+    font-size: 25px;
+    margin-right:10px;
+}
+
+ul.list-category li{
+    cursor: pointer;
+    padding: 10px;
+}
+
+ul.list-category li input{
+    cursor: pointer;
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+.tienda-result-orderBy{
+    width:100%;
+    text-align:right;
+    padding-bottom:10px;
+}
+
+.tienda-result-table{
+    background-color:#F5F5F5;
+    padding-bottom:20px;
+    padding-left:10px;
+    padding-right:10px;
+}
+
+.tiendaResultItem{
+    padding:10px 0 10px 10px;
+    width:780px;
+}
+
+.separatorResultItem{
+    border-bottom: solid 1px black;
+}
+
+.tiendaResultLeft{
+    display:inline-block;
+    vertical-align:middle;
+}
+
+.tiendaResultMiddle{
+    display:inline-block;
+    vertical-align:middle;
+    width:480px;
+    /*width:60%;*/
+}
+
+.tiendaResultRight{
+    display:inline-block;
+    vertical-align:middle;
+    width:200px;
+    /*width:25%;*/
+}
+
+.search-title-category{	
+    font-weight: bold;
+    font-size: 18px;
+}
+
+img.logo-tienda-result{
+    padding:1%;
+    width:80px;
+    height:80px;
+    margin-right:5px;
+}
+
+.data-tienda-result-item{
+    padding:1%;
+
+}
+
+.horario-tienda-result-item{
+    padding:1%;
+}
+
+/******************datosTienda*****************/
+.datos-tienda-result-container{
+    margin: 0 auto;
+    width:1120px;
+}
+
+.tienda-result-container{
+    background-color:#f5f5f5;
+    padding-top:15px;
+    min-height: 1000px;
+}
+.tienda-result-container div{
+    /*border:solid;	*/
+}
+
+li.body-tienda-result-container{
+    list-style:none;
+    text-align: center;
+    padding-top:20px;
+}
+
+li.body-tienda-result-container div.tienda-data-info{
+    padding-top:5px;
+    padding-bottom:5px;
+}
+
+.tienda-result-container-left{
+    width:190px;
+    display:inline-block;
+    vertical-align: top;
+    margin-right:20px;
+}
+
+.tienda-result-container-middle{
+    width:600px;
+    display:inline-block;
+}
+
+.tienda-result-container-right{
+    width:300px;
+    display:inline-block;
+    vertical-align: top;
+    margin-left:20px;
+}
+
+.total-infoPedido-tienda{
+    padding:10px;
+    font-size: 20px;
+}
+
+img.logo-tienda-data{
+    width:70px;
+    height:70px;
+}
+
+.datos-tienda-result-container div{
+    display:inline-block;
+    vertical-align:middle;
+}
+
+.tienda-datos-container-left{
+    margin-left:5px;
+}
+
+.lista-tienda-data{
+    margin: 0;
+    padding: 0;
+    background-color:white;
+}
+
+.lista-tienda-data a{
+    color:#535353;
+}
+
+.lista-tienda-data div{
+    cursor: pointer;
+    padding:10px;
+}
+
+.lista-tienda-data div:hover {
+    text-decoration: underline;
+}
+
+.tienda-datos-container-right{
+    float:right;
+    margin-top:13px;
+}
+
+ul.tienda-data-menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+li.tienda-data-menu-item {
+    float: left;
+}
+
+li.tienda-data-menu-item a, li.tienda-data-menu-item span{
+    display: inline-block;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;	
+    font-weight: bold;
+    font-size: 18px;
+    color: #535353;
+}
+
+li.tienda-data-menu-item a:hover {
+    text-decoration: underline;
+}
+
+.tienda-data-info{
+    background-color:white;
+    padding-left:2.5%;
+    padding-bottom:1.5%;
+    text-align:left;
+}
+
+button.hacerPedido{	
+    height: 36px;
+    width: 90%;
+}
+
+.infoPedido-tienda{
+    background-color:white;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+
+.tipoEnvio-tienda-menu{
+    width: 90%;
+    margin:auto;
+    margin-top:10px;
+    padding-top:4px;
+    padding-bottom:4px;
+    background-color:#f5f5f5;
+}
+
+.tipoEnvio-tienda-menu div{
+    width:46%;
+    height:50px;
+    display:inline-block;
+    vertical-align:middle;
+    line-height: 50px;
+    text-align: center;
+}
+
+.tipoEnvio-tienda-menu a{
+    text-decoration: none;	
+    color: #535353;
+}
+
+a.toSelect-tipoEnvio:hover {
+    text-decoration: underline;	
+    cursor: pointer;
+}
+
+.div-separator{
+    width: 90%;
+    margin:auto;
+    border-top: 1px solid #cacaca;
+    margin-top:10px;
+    margin-bottom:10px;
+}
+
+.total-cesta,.articulos-cesta{
+    width: 93%;
+    margin:auto;
+}
+
+div.search-title-category{	
+    font-weight: bold;
+    font-size: 20px;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+
+.selectedTiendaDataList{
+    background-color: white;
+}
+
+/******************productosTienda.html*******************/
+.tienda-data-info-product {
+    background-color: white;
+    padding-top: 5px;
+    padding-bottom:20px;
+    /*height:1000px;*/
+}
+
+.searchFormProduct{	
+    padding-top:3%;
+    padding-bottom:10px;
+    margin: 0 auto;
+    text-align: center;
+    width:100%;
+}
+
+.searchFormProduct input{
+    height: 30px;
+    width: 73%;
+}
+
+.searchFormProduct button{
+    height: 36px;
+    width: 12%;
+}
+
+.listaSearchProduct{
+    margin-left:3%;
+    margin-right:3%;
+    margin-top:20px;
+    text-align:left;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.categoriaSearchTitle{
+    padding-bottom:3%;
+    color: black;
+    font-weight: bold;
+    font-size: 16px;
+}
+.productoItem{    
+    padding-bottom:5px;
+}
+
+.productoItemImagen{
+    padding-top:5px;
+    display:inline-block;
+    vertical-align:middle;
+    padding-right:5px;
+}
+
+.productoItemDatos{
+    padding-top:5px;
+    display:inline-block;
+    vertical-align:middle;
+    width:365px;
+}
+
+.productoSearchTitle{
+    padding-bottom:1%;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.productoSearchDescripcion{
+    padding-bottom:3%;
+    font-size: 12px;
+}
+
+.productoItemComprar{	
+    display:inline-block;
+    vertical-align:middle;
+    width: 132px;
+}
+
+.productoSearchPrecio{
+    font-size: 16px;
+    color: black;
+    display:inline-block;
+    vertical-align:middle;
+}
+
+.productoSearchBoton{
+    display:inline-block;
+    vertical-align:middle;
+}
+
+[id*=productoAddButton]{
+    width: 36px;
+    height: 36px;
+    border-radius: 2px;
+    text-align: center;
+    font-size: 1.57143rem;
+    font-weight: bold;
+    cursor: pointer;
+    color: white;
+    background-color: #266abd;
+    border: 1px solid transparent;
+    margin-left: 8px;
+}
+
+button.productoSearchButton:hover{
+}
+
+/******************opinionesTienda.html*******************/
+.tienda-data-info-opinion{
+    padding-left:3%;
+    padding-right:3%;
+    padding-top:3%;
+    padding-bottom:3%;
+    background-color: white;
+    text-align:left;
+}
+
+.opinionesGenerales{
+    padding-bottom:3%;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.opinionesGeneralesTitle{
+    font-size: 20px;
+    padding-bottom:3%;
+}
+
+.opinionesGeneralDiv{
+    display: flex;
+    justify-content: space-between;
+}
+/*
+.opinionesGeneralesEstrella{
+    line-height: 115px;
+}*/
+
+.opinionesDataItem{
+    padding-top:2%;
+    padding-bottom:2%;
+    border-bottom: 1px solid #eaeaea;
+}
+.opinionesData{
+    padding-bottom:1%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.opinionesDataCoemntario{
+    padding-top:1%;
+}
+
+/******************iniciarSesion.html registrarCuenta.html*******************/
+.iniciarSesionFormTitle{
+    font-size: 24px;
+}
+.iniciarSesion-container{
+    border-radius: 3px;
+}
+
+.iniciarSesionForm{
+    margin: 0 auto;
+    margin-top:30px;
+    border: 1px solid #eaeaea;
+    width:285px;
+    padding:30px;
+    padding-top:20px;
+}
+
+.iniciarSesionForm a:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.iniciarSesionForm p{
+    font-size: 15px;
+}
+
+#iniciarSesionForm\:iniciarSesionNickMail, #iniciarSesionForm\:iniciarSesionPassword{
+    height: 30px;	
+    margin-top:20px;
+    width: 260px;
+    padding-left:10px;
+    padding-right:10px;
+}
+
+#iniciarSesionForm\:iniciarSesionButton{
+    height: 45px;
+    margin-top:20px;
+    width: 284px;
+    background-color: #266abd;
+    border:none;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/******************cuentaInfo.html*******************/
+.cuentaInfoDiv{
+    width: 80%;
+    margin: 20px 10% 20px 10%;
+}
+
+.cuentaInfoLeft{
+    width: 30%;
+    display:inline-block;
+    vertical-align: top;
+}
+
+.cuentaInfoRight{
+    width: 69%;
+    display:inline-block;
+}
+
+ul.cuentaInfoList{	
+    list-style: none;
+    list-style-image: none;
+    margin-top: 0;
+    margin-left: 0;
+    padding: 0;
+}
+
+li.cuentaInfoItem{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+li.cuentaInfoItem a{
+    color: #535353;
+    padding: 15px;
+}
+
+li.cuentaInfoItem a:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.cuentaInfoFormTitle, .cuentaDireccionFormTitle{
+    margin-top: 0;
+    font-size: 24px;
+}
+
+.cuentaInfoForm input{
+    height: 30px;	
+    margin-bottom:20px;
+    width: 410px;
+    padding-left:10px;
+    padding-right:10px;
+}
+
+.cuentaInfoForm #cuentaInfoButton, #newCardForm\:cuentaInfoButton, #newPaypalForm\:cuentaInfoButton, #newProductoForm\:cuentaInfoButton{
+    height: 45px;
+    width: 433px;
+    background-color: #266abd;
+    border:none;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#editUserForm\:cuentaInfoButton, #solicitarTiendaForm\:cuentaInfoButton{
+    height: 45px;
+    width: 433px;
+    background-color: #266abd;
+    border:none;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.cuentaInfoForm p{
+    padding-top:20px;
+    width: 433px;
+    border-top: 1px solid #cacaca;
+}
+
+div.cuentaInfoFormLabel{
+    padding-bottom:5px;
+}
+
+.cuentaPedidoForm p{
+    padding-bottom:20px;
+    border-bottom: 1px solid #cacaca;
+}
+
+/******************cuentaPedido.html*******************/
+
+.cuentaPedidoItemDatos, .cuentaPedidoItemDatosVer, .cuentaPedidoItemEstado, .cuentaPedidoItemAcciones, .cuentaPedidoItemTotal{
+    display:inline-block;
+    vertical-align:middle;
+}
+
+.cuentaPedidoItemDatos{
+    width:48%;
+}
+
+.cuentaPedidoItemDatosVer{
+    width:68%;
+}
+
+.cuentaPedidoItemTotal{
+    width:10%;
+    text-align: center;
+}
+
+.cuentaPedidoItemEstado{
+    width:20%;
+    text-align:center;
+}
+
+.cuentaPedidoItemAcciones{
+    width:20%;
+    text-align:center;
+}
+
+.cuentaPedidoItem{
+    border-bottom: 1px solid #cacaca;
+    padding-bottom:20px;
+}
+
+/******************cuentaMetodoPago.html*******************/
+.cuentaMetodosDePago{
+    text-align:center;
+    padding-top:20px;
+}
+
+.cuentaMetodosDePago a{
+    color: #535353;
+}
+
+.cuentaMetodosDePagoTarjeta{
+    margin-right:30px;
+}
+
+.cuentaMetodosDePagoTarjeta, .cuentaMetodosDePagoPayPal{	
+    width: 150px;
+    display:inline-block;
+    vertical-align: top;
+    height: 80px;
+    text-align:center;
+    padding:5px;
+    font-size: 14px;
+    border-radius: 25px;
+    font-weight: bold;
+    border: 1px solid #cacaca;
+    background-color:#cacaca;
+}
+
+.cuentaMetodosDePagoTarjeta:hover, .cuentaMetodosDePagoPayPal:hover{	
+    cursor: pointer;
+    background-color:white;
+}
+
+.cuentaMetodoPago{
+    padding-bottom:20px;
+    border-bottom: 1px solid #cacaca;
+}
+
+.cuentaMetodoPagoLogo, .cuentaMetodoPagoItemDatos, .cuentaMetodoPagoItemAcciones{
+    display:inline-block;
+    vertical-align:middle;
+}
+
+.cuentaMetodoPagoItemDatos{
+    width:60%;
+}
+
+.cuentaMetodoPagoItemAcciones{
+    text-align:center;
+    width:19%;
+}
+
+.cuentaMetodoPagoItemDatos p, .cuentaPedidoItemDatos p{
+    margin:5px 5px 5px 5px;
+}
+
+/************************cuentaDireccion.html********************/
+.cuentaDireccionAdd{
+    text-align:center;
+    padding-top:20px;
+}
+
+.cuentaDireccionAddNueva{	
+    width: 150px;
+    display:inline-block;
+    vertical-align: top;
+    height: 80px;
+    text-align:center;
+    padding:5px;
+    font-size: 14px;
+    border-radius: 25px;
+    font-weight: bold;
+    border: 1px solid #cacaca;
+    background-color:#cacaca;
+}
+
+.cuentaDireccionAddNueva:hover{	
+    cursor: pointer;
+    background-color:white;
+}
+
+.cuentaDireccion{
+    border-top: 1px solid #cacaca;
+    padding-top:20px;
+    padding-bottom:20px;
+    border-bottom: 1px solid #cacaca;
+}
+
+.cuentaDireccionItemDatos, .cuentaDireccionItemAcciones{
+    display:inline-block;
+    vertical-align:middle;
+}
+
+.cuentaDireccionItemDatos{
+    width:80%;
+}
+
+.cuentaDireccionItemAcciones{
+    text-align:center;
+    width:19%;
+}
+
+.cuentaDireccionItemDatos p{
+    margin:5px 5px 5px 5px;
+}
+
+.cuentaDireccionAdd a{
+    color: #535353;
+}
+
+input.cuentaInput{
+    height: 30px;	
+    margin-bottom:20px;
+    width: 410px;
+    padding-left:10px;
+    padding-right:10px;
+}
+
+.cuentaDireccionForm #editAddressForm\:cuentaInfoButton{
+    height: 45px;
+    width: 433px;
+    background-color: #266abd;
+    border:none;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/************************cuentaDireccion.html********************/
+
+.cuentaPedidoForm input{
+    height: 30px;	
+    margin-bottom:20px;
+    width: 410px;
+    padding-left:10px;
+    padding-right:10px;
+}
+
+.cuentaPedidoForm button{
+    height: 45px;
+    width: 433px;
+    background-color: #266abd;
+    border:none;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/************************miTienda********************/
+
+.miTienda{
+    text-align:justify;
+}
+
+li.cuentaInfoSubItem{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-left:20px;
+}
+
+li.cuentaInfoSubItem a{
+    color: #535353;
+    padding: 15px;
+}
+
+li.cuentaInfoSubItem a:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/************************productosTienda.html********************/
+
+.tiendaLogoProducto, .tiendaNombreProductoOtros,.tiendaNombreProductoNombre,.tiendaLogoProductoLabel{	
+    display:inline-block;
+    vertical-align:middle;
+}
+
+.tiendaLogoProductoLabel{
+    width: 10%;
+    margin-right: 1%;
+}
+
+img.productoLogo{
+    width: 90px;
+}
+
+.labelCenter{
+    text-align:center;
+}
+
+.tiendaNombreProductoNombre{
+    width: 26%;
+    font-weight: bold;
+}
+
+.tiendaNombreProductoOtros{
+    width: 20%;
+    font-weight: bold;
+}
+
+
+.miTiendaProductosAdd{
+    text-align:center;
+    padding-top:20px;
+}
+
+.miTiendaProductosAddNueva{	
+    width: 150px;
+    display:inline-block;
+    vertical-align: top;
+    height: 80px;
+    text-align:center;
+    padding:5px;
+    font-size: 14px;
+    border-radius: 25px;
+    font-weight: bold;
+    border: 1px solid #cacaca;
+    background-color:#cacaca;
+}
+
+.miTiendaProductosAddNueva:hover{	
+    cursor: pointer;
+    background-color:white;
+}
+
+.miTiendaProductos{
+    border-top: 1px solid #cacaca;
+    padding-top:20px;
+    padding-bottom:20px;
+    border-bottom: 1px solid #cacaca;
+}
+
+.miTiendaProductosItemDatos, .miTiendaProductosItemAcciones{
+    display:inline-block;
+    vertical-align:middle;
+}
+
+.miTiendaProductosItemDatos{
+    width:89%;
+}
+
+.miTiendaProductosItemAcciones{
+    text-align:center;
+    width:10%;
+}
+
+.miTiendaProductosItemDatos p{
+    margin:5px 5px 5px 5px;
+}
+
+.miTiendaProductosAdd a{
+    color: #535353;
+}
+
+.miTiendaProductosForm input{
+    height: 30px;	
+    margin-bottom:20px;
+    width: 410px;
+    padding-left:10px;
+    padding-right:10px;
+}
+
+.miTiendaProductosForm button{
+    height: 45px;
+    width: 433px;
+    background-color: #266abd;
+    border:none;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.miTiendaProductosFormTitle{
+    margin-top: 0;
+    font-size: 24px;
+}
+
+/************************opcionesEnvioTienda.html********************/
+
+.tiendaNombreProducto{	
+    display:inline-block;
+    vertical-align:middle;
+}
+
+
+.miTiendaEnvioAdd{
+    text-align:center;
+    padding-top:20px;
+}
+
+.miTiendaEnvioAddNueva{	
+    width: 150px;
+    display:inline-block;
+    vertical-align: top;
+    height: 80px;
+    text-align:center;
+    padding:5px;
+    font-size: 14px;
+    border-radius: 25px;
+    font-weight: bold;
+    border: 1px solid #cacaca;
+    background-color:#cacaca;
+}
+
+.miTiendaEnvioAddNueva:hover{	
+    cursor: pointer;
+    background-color:white;
+}
+
+.miTiendaEnvio{
+    border-top: 1px solid #cacaca;
+    padding-top:20px;
+    padding-bottom:20px;
+    border-bottom: 1px solid #cacaca;
+}
+
+.miTiendaEnvioItemDatos, .miTiendaEnvioItemAcciones{
+    display:inline-block;
+    vertical-align:middle;
+}
+
+.miTiendaEnvioItemDatos{
+    width:80%;
+}
+
+.miTiendaEnvioItemAcciones{
+    text-align:center;
+    width:19%;
+}
+
+.miTiendaEnvioItemDatos p{
+    margin:5px 5px 5px 5px;
+}
+
+.miTiendaEnvioAdd a{
+    color: #535353;
+}
+
+.miTiendaEnvioForm input{
+    height: 30px;	
+    margin-bottom:20px;
+    width: 410px;
+    padding-left:10px;
+    padding-right:10px;
+}
+
+.miTiendaEnvioForm button{
+    height: 45px;
+    width: 433px;
+    background-color: #266abd;
+    border:none;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.miTiendaEnvioFormTitle{
+    margin-top: 0;
+    font-size: 24px;
+}
+
+/************************cuentaMensajes************************/
+
+.cuentaMensajes{
+    border-top: 1px solid #cacaca;
+    padding-top:10px;
+    padding-bottom:10px;
+    border-bottom: 1px solid #cacaca;
+}
+
+.TitleMessage{
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.tiendaMensajesUsuario, .tiendaMensajesAsunto, .tiendaMensajesItemAcciones{
+    display:inline-block;
+    vertical-align:middle;
+}
+
+.tiendaMensajesUsuario{
+    width: 35%;
+}
+
+.tiendaMensajesAsunto{
+    width: 50%;
+}
+
+.tiendaMensajesItemAcciones{
+    text-align:center;
+    width: 13%;
+}
+
+[id*=verMensaje]{
+    height: 30px;
+    width: 80px;
+    background-color: #266abd;
+    border:none;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+[id*=responderMensaje]{
+    height: 30px;
+    width: 180px;
+    background-color: #266abd;
+    border:none;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.TitleBox{
+    padding-bottom:10px;
+}
+
+.tiendaMensajesUsuarioVerMensaje, .tiendaMensajesAsuntoVerMensaje{
+    display:inline-block;
+    vertical-align:middle;
+}
+
+.tiendaMensajesUsuarioVerMensaje{
+    width: 50%;
+}
+
+.tiendaMensajesAsuntoVerMensaje{
+    width: 49%;
+}
+
+.tiendaMensajesContenidoVerMensaje{
+    padding-top:20px;
+    padding-bottom:20px;
+    padding-left:40px;
+    padding-right:40px;
+}
+
+.tiendaMensajesContenidoSeparador{
+    width: 80%;
+    border-bottom: 1px solid #cacaca;
+    margin: auto;
+}
+
+.cuentaMensajeItem{    
+    padding-top:10px;
+    padding-bottom:20px;
+}
+
+/************************horarioTienda************************/
+
+#HorarioNewItem\:crearHorario, #HorarioEditItem\:editarHorario{
+    height: 45px;
+    width: 433px;
+    background-color: #266abd;
+    border:none;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.miTiendaHorario{
+    border-top: 1px solid #cacaca;
+    padding-top: 20px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #cacaca;
+}
+
+.horarioDia div{
+    display:inline-block;
+    vertical-align:middle;
+    margin: 10px 0 10px 0;
+}
+
+.horarioInput{
+    height: 25px;
+    width: 50px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 0 10px 0 10px;
+}
+
+.horarioInfoFormLabel{
+    width: 70px;
+}
+
+.titleDay{
+    padding-right: 80px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    font-weight: bold;
+}
+
+.noHayElemntosMensaje{
+    font-size: 17px;
+    font-weight: bold;
+}
+/**************MENSAJE****************/
+
+#nuevoMensaje\:mensajeNuevoButton{
+    height: 45px;
+    width: 433px;
+    background-color: #266abd;
+    border:none;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#nuevoMensaje\:asuntoForm, #nuevoMensaje select {
+    height: 30px;
+    margin-bottom: 20px;
+    width: 410px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#j_idt36\:0\:MensajeListItem\:verMensaje{
+    height: 45px;
+    background-color: #266abd;
+    border:none;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/***************Pedido***********/
+
+
+.cuentaPedidoFormulario{
+    margin: 0 auto;
+    width:850px;
+}
+
+.cuentaPedidoProceso{
+    margin-top: 50px;
+    text-align:center;
+}
+
+.cuentaPedidoContenido{
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 25px;
+}
+
+.tituloCamposPedido{
+    border-bottom: solid 1px #cacaca;
+    font-weight:bold;
+    padding: 10px 0 10px 0;
+}
+
+.productoItemPedido{
+    border-bottom: solid 1px #cacaca;
+    padding: 15px 0 15px 0;
+}
+
+.imagenProducto,.datosProducto,.precioUnitarioProducto,.cantidadProducto,.precioTotalProducto{
+    display:inline-block;
+    vertical-align:middle;
+}
+
+.imagenProducto img{
+    width: 104px;
+}
+
+.imagenProducto{
+    width: 12%;
+    margin-right: 3%;
+}
+
+.datosProducto{
+    width: 40%;
+}
+
+.precioUnitarioProducto,.cantidadProducto,.precioTotalProducto{
+    width: 14%;
+    text-align:center;
+}
+
+
+.posicionamientoSubtotal,.subtotalTextoDiv{
+    display:inline-block;
+    vertical-align:middle;
+    padding: 15px 0 15px 0;
+}
+
+.posicionamientoSubtotal{
+    width: 70.3%;
+}
+
+.subtotalTextoDiv{
+    width: 29%;
+    border-bottom: solid 1px #cacaca;
+}
+
+.subtotalPedidoTexto,.subtotalPedido{
+    width: 48.5%;
+    text-align:center;
+    display:inline-block;
+    vertical-align:middle;
+}
+
+.subtotalPedidoTexto{
+    font-weight:bold;
+}
+
+.subtotalLineaSubtotal{
+    width: 68.5%;
+    display:inline-block;
+    vertical-align:middle;
+    margin: 0;
+}
+
+.subtotalLinea{
+    border-bottom: solid 1px #cacaca;
+    width: 30%;
+    display:inline-block;
+    vertical-align:middle;
+    margin: 0;
+}
+
+.tituloProceso{
+    text-align: center;
+}
+
+.moverProcesoPedido{
+    width:300px;
+    display: block;
+    margin: 0 auto;
+}
+
+.moverProcesoPedido img{
+    margin: 15px;
+}
+
+.direccionPedido h3{
+    font-size: 21px;
+    line-height: 1.3;
+    font-weight: bold;
+}
+
+.direccionPedido div, #choosePago, #newPago{
+    width: 47%;
+    display:inline-block;
+    vertical-align:top;
+}
+
+.elegirPagoPedido, .newPago{
+    width: 47%;
+    display:inline-block;
+    padding: 14px 18px;
+}
+
+.newDireccionPedido input{
+    width:80%;
+}
+
+.cuentaPedidoContenidoEnvio{
+    width:100%;
+    margin-top: 25px;
+}
+
+.enviarA{
+    color: #888;
+}
+
+.enviarAProducto{
+    margin-left: 25px;
+}
+
+.cuentaPedidoFormularioEnvio{
+    margin: 0 auto;
+    width:1000px;
+}
+
+.resumenPedidoProducto, .resumenPedidoPrecio{
+    display:inline-block;
+    vertical-align:top;
+}
+
+.resumenPedidoProducto{
+    width:66.7%;
+}
+
+.resumenPedidoPrecio{
+    width:29%;
+}
+
+.resumenPedidoEnvioPago, .resumenPedidoProductos{
+    margin-bottom: 15px;
+}
+
+.resumenPedidoEnvioPago, .resumenPedidoProductos, .resumenPedidoPrecio{
+    border-radius: 4px;
+    border: 1px #ddd solid;
+    padding: 14px 18px;
+}
+
+img.logoProductoResumen{
+    width:82px;
+}
+
+.resumenEnvio, .resumenPago, .resumenEnvio{
+    width: 32.8%;
+    display:inline-block;
+    vertical-align:top;
+}
+
+.resumenPedidoItem{
+    margin-top: 15px;
+}
+
+.resumenPedidoItem div{
+    display:inline-block;
+    vertical-align:middle;
+}
+
+.resumenEnvio{
+    margin-bottom: 15px;
+}
+
+.resumenPedidoLogo{
+    width: 20%;
+}
+
+.resumenPedidoDatos{
+    width: 79%;
+}
+
+button.nuevoDireccionPedido\:cuentaPedidoButton{
+    height: 45px;
+    width: 433px;
+    background-color: #266abd;
+    border:none;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.subtotalResumen div, .totalResumen div{
+    display:inline-block;
+    vertical-align:top;
+    width:49%;
+}
+
+.rightPedidoPrecio{
+    text-align: right;
+}
+
+#tramitarPedido\:tramitarPedidoButton {
+    height: 45px;
+    width: 100%;
+    background-color: #266abd;
+    border:none;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#nuevoDireccionPedido\:cuentaPedidoButton, #DireccionPedido\:cuentaPedidoButton{
+    height: 45px;
+    width: 433px;
+    background-color: #266abd;
+    border:none;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.newDireccionPedido select, .elegirDireccionPedido select{
+    width: 250px;
+}
+
+.elegirDireccionPedido{
+    padding: 14px 18px;
+}
+
+[id*=cuentaInfoButton]{
+    height: 45px;
+    width: 433px;
+    background-color: #266abd;
+    border:none;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#tramitarPedidoEmepezar\:tramitarPedidoButton, #comandoNext\:cuentaInfoButton{
+    height: 45px;
+    width: 90%;
+    background-color: #266abd;
+    border:none;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+[id*=PedidoButton]{
+    min-height: 30px;
+    width: 182px;
+    background-color: #266abd;
+    border:none;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 5px;
+    white-space:normal;
+}
+
+.labelPedidoItem{
+    width: 49.5%;
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+.verPedidoItem{
+    margin-left: 10%;
+    margin-bottom: 2.5%;
+}
+
+.verPedidoLogo,.verPedidoDatos{
+    display:inline-block;
+    vertical-align:middle;
+}
+
+.verPedidoLogo{
+    margin-right: 2.5%;
+}
+
+img.logoVerPedido{
+   width:82px; 
+}

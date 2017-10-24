@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListEnvioTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListEnvioEmpty}" rendered="#{envioController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{envioController.items.rowCount > 0}">
+                    <h:outputText value="#{envioController.pagination.pageFirstItem + 1}..#{envioController.pagination.pageLastItem + 1}/#{envioController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{envioController.previous}" value="#{bundle.Previous} #{envioController.pagination.pageSize}" rendered="#{envioController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{envioController.next}" value="#{bundle.Next} #{envioController.pagination.pageSize}" rendered="#{envioController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{envioController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEnvioTitle_idenvio}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idenvio}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEnvioTitle_nombre}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombre}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEnvioTitle_precioEnvio}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.precioEnvio}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEnvioTitle_tienda}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tienda}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{envioController.prepareView}" value="#{bundle.ListEnvioViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{envioController.prepareEdit}" value="#{bundle.ListEnvioEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{envioController.destroy}" value="#{bundle.ListEnvioDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{envioController.prepareCreate}" value="#{bundle.ListEnvioCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListEnvioIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

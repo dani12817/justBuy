@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title><ui:insert name="title">Just Buy</ui:insert></title>
+        <h:outputStylesheet library="css" name="style.css"/>
+    </h:head>
+
+    <h:body>
+        <div class="tienda-result-container-right">
+
+            <div class="total-infoPedido-tienda">
+                <table width="100%">
+                    <tr>
+                        <td align="left"><img style="padding-right:10px;vertical-align: middle;" src="../resources/images/cesta-compra-icon.PNG"/>Total del Pedido:</td>
+                        <td align="right">0,00€</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="infoPedido-tienda">
+                <h:panelGroup rendered="#{productoController.carritoDeLaCompra.size() > 0 and usuarioController.usuarioLogin != null}">
+                    <h:form id="tramitarPedidoEmepezar">
+                        <h:commandButton id="tramitarPedidoButton" value="Hacer Pedido" 
+                                         action="#{pedidoController.procesoCarrito(productoController.envioElegido,tiendaController.tiendaSeleccionada,usuarioController.usuarioLogin)}"/>
+                    </h:form>
+                </h:panelGroup>
+                <div class="tipoEnvio-tienda-menu">
+                    <div id="Recoger" style="background-color:white;" class="tipoEnvio-tienda-item"><span class="selected">Recoger</span></div>
+                    <div id="Envio" class="tipoEnvio-tienda-item" onclick="changeSelected('Envio', 'Recoger')"><a class="toSelect-tipoEnvio">Envio</a></div>
+                </div>
+                <br />
+
+                <div class="div-separator"></div>
+                <ui:repeat value="#{productoController.carritoDeLaCompra}" var="producto">
+                    <table class="articulos-cesta">
+                        <tr>
+                            <td align="left">#{producto.prodcuto.nombre} x#{producto.cantidad}</td>
+                            <td align="right">#{producto.total}€ (#{producto.prodcuto.precio}€/Unidad)</td>
+                            <td align="center" style="color: red"><h:form><h:commandLink value="X" action="#{productoController.quitarProductoCarrito(producto)}"/></h:form></td>
+                        </tr>
+                    </table>
+                </ui:repeat>
+
+                <div class="div-separator"></div>
+
+                <table class="total-cesta">
+                    <tr>
+                        <td align="left">Subtotal</td>
+                        <td align="right">#{productoController.calcularTotalDelCarrito()}€</td>
+                    </tr>
+                    <tr>
+                        <td align="left">Gastos de envío</td>
+                        <td align="right">#{productoController.envioElegido.precioEnvio}€</td>
+                    </tr>
+                    <tr style="font-size: 20px;">
+                        <td align="left">Total</td>
+                        <td align="right">#{productoController.totalDelCarrito}€</td>
+                    </tr>
+                </table>	
+
+                <div class="div-separator"></div>
+
+                <table width="100%">
+                    <tr>
+                        <td><img src="../resources/images/efectivo-icon.PNG"/></td>
+                        <td><img src="../resources/images/tarjeta-icon.PNG"/></td>
+                        <td><img src="../resources/images/paypal-icon.PNG"/></td>
+                    </tr>
+                    <tr>
+                        <td>Efectivo</td>
+                        <td>Tarjeta</td>
+                        <td>Paypal</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </h:body>
+
+</html>

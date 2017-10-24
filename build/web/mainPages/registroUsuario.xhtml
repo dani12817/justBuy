@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <head>
+        <link rel="stylesheet" type="text/css" href="resources/css/style.css"/>
+    </head>
+    <ui:composition template="/plantilla.xhtml">
+        <ui:define name="body">
+            <div class="iniciarSesion-container">
+                <div class="iniciarSesionForm">
+                    <h:form id="iniciarSesionForm" enctype="multipart/form-data">
+                        <h1 class="iniciarSesionFormTitle">Registrar de Usuario</h1>
+                        <div class="cuentaInfoFormLabel">Nick</div>
+                        <h:inputText id="registroNick" value="#{usuarioController.newUser.nick}" size="15" required="true"/>
+                        <div class="cuentaInfoFormLabel">Contraseña</div>
+                        <h:inputSecret id="registroPassword"  value="#{usuarioController.newUser.clave}" size="25" required="true"/>
+                        <div class="cuentaInfoFormLabel">Confirmar Contraseña</div>
+                        <h:inputSecret id="registroPasswordConfirmar"  value="#{usuarioController.passConfirmar}" size="25" required="true"/>
+                        <label class="mensajeError">#{usuarioController.error}</label>
+                        
+                        <div class="cuentaInfoFormLabel">Logo</div>                    
+                        <img src="../resources/images/no-avatar.jpg" width="100px"/>
+                        <p:fileUpload id="logo" value="#{usuarioController.avatar}" mode="simple"/>
+
+                        <div class="cuentaInfoFormLabel">Nombre</div>
+                        <h:inputText id="registroNombre"  value="#{usuarioController.newUser.nombre}" size="60" required="true"/>
+                        <div class="cuentaInfoFormLabel">Teléfono</div>
+                        <h:inputText id="registroTelefono"  value="#{usuarioController.newUser.telefono}" size="11" required="true"/>
+                        <div class="cuentaInfoFormLabel">E-Mail</div>
+                        <h:inputText id="registroMail"  value="#{usuarioController.newUser.email}" size="60" required="true"/>
+
+                        <h:commandButton id="iniciarSesionButton" value="Crear Usuario" action="#{usuarioController.crearNuevoUsuario()}"/>
+                        <p style="text-align:justify">Al hacer clic en Crear cuenta aceptas los <a>Términos y Condiciones</a>, <a>Pólitica de Privicidad</a> y la <a>Pólitica de Cookies</a> de Just Buy.</p>
+                    </h:form>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <head>
+        <link rel="stylesheet" type="text/css" href="resources/css/style.css"/>
+    </head>
+    <ui:composition template="/plantilla.xhtml">
+        <ui:define name="body">
+            <div class="cuentaInfo-container">
+                <div class="cuentaInfoDiv">       
+
+                    <ui:include src="/mainPages/infoCuenta/cuentaInfoMenuIzquierdo.xhtml"/>
+
+                    <div class="cuentaInfoRight">
+                        <div class="cuentaInfoForm">
+                            <h1 class="cuentaInfoFormTitle">Cuenta</h1>
+                            <h:form id="editUserForm">
+                                <div class="cuentaInfoFormLabel">Nombre</div>
+                                <h:inputText id="cuentaInfoNombre" maxlength="60" value="#{usuarioController.usuarioLogin.nombre}" size="5" required="true"/>
+                                <div class="cuentaInfoFormLabel">E-mail</div>
+                                <h:inputText id="cuentaInfoMail" maxlength="60"  value="#{usuarioController.usuarioLogin.email}" size="5" required="true"/>
+                                <div class="cuentaInfoFormLabel">Teléfono</div>
+                                <h:inputText id="cuentaInfoTelefono" converterMessage="Solo números" maxlength="9" value="#{usuarioController.usuarioLogin.telefono}" required="true"/>
+                                <br />
+                                <h:commandButton id="cuentaInfoButton" value="Modificar Cuenta" action="#{usuarioController.editarUsuario()}"/>
+                            </h:form>
+                            <p>¿Quieres eliminar tu cuenta en Just Eat?
+                                <br />Elimina mi perfil</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

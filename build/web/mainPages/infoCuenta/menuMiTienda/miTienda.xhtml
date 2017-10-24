@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <head>
+        <link rel="stylesheet" type="text/css" href="resources/css/style.css"/>
+    </head>
+    <ui:composition template="/plantilla.xhtml">
+        <ui:define name="body">
+            <div class="cuentaInfo-container">
+                <div class="cuentaInfoDiv">       
+
+                    <ui:include src="/mainPages/infoCuenta/cuentaInfoMenuIzquierdo.xhtml"/>
+
+                    <div class="cuentaInfoRight">
+                        <div class="cuentaInfoForm">
+                            <h1 class="cuentaInfoFormTitle">Mi Tienda</h1>
+                            <c:choose>
+                                <c:when test='#{tiendaController.hayTienda}'>
+                                    <p class="miTienda">Actualmente tu tienda está pendiente de aprobación.</p>
+                                </c:when>
+                                <c:otherwise>
+                                    <p class="miTienda">Actualmente no tienes ninguna tienda creada, pulsa el botón abajo para enviar una solicitud para poder tener una tienda.</p>
+                                    <button id="cuentaInfoButton" onclick="location.href = 'miTiendaNew.xhtml';">Solicitar Tienda</button>
+                                </c:otherwise>
+                            </c:choose>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

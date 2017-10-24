@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreatePagopaypalTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreatePagopaypalLabel_idpagoPaypal}" for="idpagoPaypal" />
+                    <h:inputText id="idpagoPaypal" value="#{pagopaypalController.selected.idpagoPaypal}" title="#{bundle.CreatePagopaypalTitle_idpagoPaypal}" required="true" requiredMessage="#{bundle.CreatePagopaypalRequiredMessage_idpagoPaypal}"/>
+                    <h:outputLabel value="#{bundle.CreatePagopaypalLabel_titular}" for="titular" />
+                    <h:inputText id="titular" value="#{pagopaypalController.selected.titular}" title="#{bundle.CreatePagopaypalTitle_titular}" required="true" requiredMessage="#{bundle.CreatePagopaypalRequiredMessage_titular}"/>
+                    <h:outputLabel value="#{bundle.CreatePagopaypalLabel_mail}" for="mail" />
+                    <h:inputText id="mail" value="#{pagopaypalController.selected.mail}" title="#{bundle.CreatePagopaypalTitle_mail}" required="true" requiredMessage="#{bundle.CreatePagopaypalRequiredMessage_mail}"/>
+                    <h:outputLabel value="#{bundle.CreatePagopaypalLabel_usuario}" for="usuario" />
+                    <h:selectOneMenu id="usuario" value="#{pagopaypalController.selected.usuario}" title="#{bundle.CreatePagopaypalTitle_usuario}" required="true" requiredMessage="#{bundle.CreatePagopaypalRequiredMessage_usuario}">
+                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{pagopaypalController.create}" value="#{bundle.CreatePagopaypalSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{pagopaypalController.prepareList}" value="#{bundle.CreatePagopaypalShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreatePagopaypalIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

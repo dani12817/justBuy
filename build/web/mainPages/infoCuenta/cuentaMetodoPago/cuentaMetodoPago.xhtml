@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <head>
+        <link rel="stylesheet" type="text/css" href="resources/css/style.css"/>
+    </head>
+    <ui:composition template="/plantilla.xhtml">
+        <ui:define name="body">
+            <div class="cuentaInfo-container">
+                <div class="cuentaInfoDiv">       
+
+                    <ui:include src="/mainPages/infoCuenta/cuentaInfoMenuIzquierdo.xhtml"/>
+
+                    #{pagopaypalController.montarListaPaypal(usuarioController.usuarioLogin)}
+                    #{pagotarjetaController.montarListaTarjeta(usuarioController.usuarioLogin)}
+
+                    <div class="cuentaInfoRight">
+                        <div class="cuentaPedidoForm">
+                            <h1 class="cuentaInfoFormTitle">Métodos de pago</h1>
+                            <p>Puedes pagar con tu tarjeta crédito/débito o PayPal.</p>
+                        </div>
+
+                        <h:panelGroup rendered="#{pagopaypalController.listaPagoPaypal.size()==0 and pagotarjetaController.listaPagoTarjeta.size()==0}">
+                            <div class="cuentaMetodoPago">
+                                <div class="cuentaMetodoPagoItem">
+                                    <label class="noHayElemntosMensaje">Actualmente no se ha creado ningún método de pago</label>
+                                </div>
+                            </div>
+                        </h:panelGroup>
+
+                        <ui:repeat value="#{pagopaypalController.listaPagoPaypal}" var="paypal">
+                            <div class="cuentaMetodoPago">
+                                <div class="cuentaMetodoPagoItem">                                    
+                                    <div class="cuentaMetodoPagoLogo">
+                                        <h:graphicImage library="images" name="paypal-icon.PNG"/>
+                                    </div>
+                                    <div class="cuentaMetodoPagoItemDatos">
+                                        <p>#{paypal.titular}</p>
+                                        <p>#{paypal.mail}</p>
+                                    </div>
+                                    <div class="cuentaMetodoPagoItemAcciones">
+                                        <h:form id="accionesPaypalForm">
+                                            <h:commandButton image="/justBuy-danielLealPerez/javax.faces.resource/edit.png.xhtml?ln=images" action="#{pagopaypalController.cargarMetodoPago(paypal.idpagoPaypal)}"/>
+                                            <h:commandButton image="/justBuy-danielLealPerez/javax.faces.resource/delete.png.xhtml?ln=images" action="#{pagopaypalController.facade.remove(paypal)}"/>
+                                        </h:form>
+                                    </div>
+                                </div>
+                            </div>
+                        </ui:repeat>
+                        <ui:repeat value="#{pagotarjetaController.listaPagoTarjeta}" var="tarjeta">
+                            <div class="cuentaMetodoPago">
+                                <div class="cuentaMetodoPagoItem">
+                                    <div class="cuentaMetodoPagoLogo">
+                                        <h:graphicImage library="images" name="tarjeta-icon.PNG"/>
+                                    </div>
+                                    <div class="cuentaMetodoPagoItemDatos">
+                                        <p>#{tarjeta.titular}</p>
+                                        <p>xxxx-xxxx-xxxx-#{tarjeta.numeroTarjeta % 10000}</p>
+                                        <p>#{tarjeta.caduca}</p>
+                                    </div>
+                                    <div class="cuentaMetodoPagoItemAcciones">
+                                        <h:form id="accionesTarjetaForm">
+                                            <h:commandButton image="/justBuy-danielLealPerez/javax.faces.resource/edit.png.xhtml?ln=images" action="#{pagotarjetaController.cargarMetodoPago(tarjeta.idmetodoPago)}"/>
+                                            <h:commandButton image="/justBuy-danielLealPerez/javax.faces.resource/delete.png.xhtml?ln=images" action="#{pagotarjetaController.facade.remove(tarjeta)}"/>
+                                        </h:form>
+                                    </div>
+                                </div>
+                            </div>
+                        </ui:repeat>
+
+
+                        <div class="cuentaMetodosDePago">
+                            <h:form id="accionesMetodopagoForm">
+                                <div class="cuentaMetodosDePagoTarjeta">
+                                    <h:commandButton image="/justBuy-danielLealPerez/javax.faces.resource/tarjeta-icon.PNG.xhtml?ln=images" action="#{pagotarjetaController.nuevoMetodoPago}"/>
+                                    <br />Añadir Tarjeta de Crédito/Débito
+                                </div>
+                                <div class="cuentaMetodosDePagoPayPal">
+                                    <h:commandButton image="/justBuy-danielLealPerez/javax.faces.resource/paypal-icon.PNG.xhtml?ln=images" action="#{pagopaypalController.nuevoMetodoPago}"/>
+                                    <br />Añadir PayPal
+                                </div>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

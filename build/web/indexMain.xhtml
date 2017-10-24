@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <head>
+        <link rel="stylesheet" type="text/css" href="resources/css/style.css"/>
+    </head>
+    <ui:composition template="/plantilla.xhtml">
+        <ui:define name="body">
+            <div class="search-container">
+                <div class="searchForm">
+                    <h:form id="search-form">
+                        <h:inputText id="searchText" value="#{tiendaController.codPostalBuscar}" size="5" required="true"/>
+                        <h:commandButton id="searchButton" value="Buscar tiendas" action="#{tiendaController.getTiendasPorCodPostal(codpostalController)}"/>
+                        <a href="newxhtml.xhtml">asd</a>
+                    </h:form>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

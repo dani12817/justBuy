@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <link rel="stylesheet" type="text/css" href="resources/css/style.css"/>
+    </head>
+    <ui:composition template="/plantilla.xhtml">
+        <ui:define name="body">
+            <div class="cuentaInfo-container">
+                <div class="cuentaInfoDiv">       
+
+                    <ui:include src="/mainPages/infoCuenta/cuentaInfoMenuIzquierdo.xhtml"/>
+
+                    <div class="cuentaInfoRight">
+                        <div class="cuentaInfoForm">
+                            <h1 class="cuentaInfoFormTitle">Crear "Mi Tienda"</h1>
+                            <h:form id="solicitarTiendaForm" enctype="multipart/form-data">
+
+                                <div class="cuentaInfoFormLabel">Nombre</div>
+                                <h:inputText id="cuentaInfoNombre" maxlength="50" value="#{tiendaController.tiendaSolicitar.nombre}" size="5" required="true"/>
+
+                                <div class="cuentaInfoFormLabel">Logo</div>                    
+                                <img src="../../../resources/images/no-logo.jpg" width="100px"/>
+                                <p:fileUpload id="logo" value="#{tiendaController.avatar}" mode="simple"/>
+
+                                <div class="cuentaInfoFormLabel">Descripcion</div>
+                                <h:inputText id="cuentaInfoDescripcion" maxlength="100" value="#{tiendaController.tiendaSolicitar.descripcion}" size="5" required="true"/>
+
+                                <div class="cuentaInfoFormLabel">Teléfono</div>
+                                <h:inputText id="cuentaInfoTelefono" maxlength="60" value="#{tiendaController.tiendaSolicitar.telefono}" size="9" required="true"/>
+
+                                <div class="cuentaInfoFormLabel">Latitud</div>
+                                <h:inputText id="cuentaInfoLalitud" maxlength="60" value="#{tiendaController.tiendaSolicitar.latitud}" size="12" />
+                                <h:inputText id="Lalitud" value="#{tiendaController.tiendaSolicitar.latitud}"/>
+
+                                <div class="cuentaInfoFormLabel">Longitud</div>
+                                <h:inputText id="cuentaInfoLongitud" maxlength="60" value="#{tiendaController.tiendaSolicitar.longitud}" size="12" />
+                                <h:inputText id="Longitud" value="#{tiendaController.tiendaSolicitar.longitud}"/>
+
+                                <div id="googleMap"  style="width:500px;height:400px;border: black"></div>
+
+                                <script language="javascript" type="text/javascript">
+                                    var currentMaker;
+
+                                    function showMap() {
+                                        var mapProp = {center: new google.maps.LatLng(38.69857326482206, -0.4813385009765625), zoom: 14};
+                                        var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+                                        google.maps.event.addListener(map, 'click', function (event) {
+                                            getCoordenadas(event.latLng, map);
+                                        });
+                                    }
+
+                                    function getCoordenadas(location, map) {
+                                        document.getElementById("solicitarTiendaForm:cuentaInfoLalitud").value = location.lat().toFixed(6);
+                                        document.getElementById("solicitarTiendaForm:Lalitud").value = location.lat().toFixed(6);
+                                        document.getElementById("solicitarTiendaForm:cuentaInfoLongitud").value = location.lng().toFixed(6);
+                                        document.getElementById("solicitarTiendaForm:Longitud").value = location.lng().toFixed(6);
+                                        var marker = new google.maps.Marker({position: location, draggable: true});
+                                        if (!(typeof currentMaker === 'undefined')) {
+                                            currentMaker.setMap(null);
+                                        }
+                                        marker.setMap(map);
+                                        currentMaker = marker;
+
+                                        currentMaker.addListener('mouseup', function () {
+                                            document.getElementById("coordenadasText").value = currentMaker.getPosition().lat().toFixed(6) + "," + currentMaker.getPosition().lng().toFixed(6);
+                                        });
+                                    }
+                                </script>
+
+                                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQqmkypDVJy_NTSKOmLsoEXMsKcffhKuw&amp;callback=showMap"></script><br />
+
+                                <div class="cuentaInfoFormLabel">Dirección</div>
+                                <h:inputText id="cuentaInfoDire1" maxlength="50" value="#{tiendaController.tiendaSolicitar.direccionLinea1}" size="5" required="true"/><br />
+                                <h:inputText id="cuentaInfoDire2" maxlength="50" value="#{tiendaController.tiendaSolicitar.direccionLinea2}" size="5" />
+
+                                <div class="cuentaInfoFormLabel">Categorías</div>
+                                <h:selectManyListbox value="#{categoriasdetiendaController.listaCategoriasSelecionadas}" style="width: 200px">
+                                    <f:selectItems value="#{categoriaController.listaDeCategorias()}" />
+                                </h:selectManyListbox>
+                                <label class="mensajeError">#{categoriasdetiendaController.errorCategorias}</label>
+                                <br /><br />
+
+                                <div class="cuentaInfoFormLabel">Cód. Postal</div>
+                                <h:selectOneMenu value="#{tiendaController.numeroPostalTienda}">
+                                    <f:selectItems value="#{tiendaController.montarlistaPropvinciaCiudadCodPostal(provinciaController, ciudadController, codpostalController)}" />
+                                </h:selectOneMenu>
+                                <br /><br />
+
+                                <h:commandButton id="cuentaInfoButton" value="Solicitar Tienda" action="#{tiendaController.solicitarNuevaTienda(codpostalController,usuarioController.usuarioLogin,categoriasdetiendaController)}"/>
+
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

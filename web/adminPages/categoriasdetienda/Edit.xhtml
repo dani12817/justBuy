@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditCategoriasdetiendaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditCategoriasdetiendaLabel_categoriasDeTiendaBoolean}" for="categoriasDeTiendaBoolean" />
+                    <h:inputText id="categoriasDeTiendaBoolean" value="#{categoriasdetiendaController.selected.categoriasDeTiendaBoolean}" title="#{bundle.EditCategoriasdetiendaTitle_categoriasDeTiendaBoolean}" />
+                    <h:outputLabel value="#{bundle.EditCategoriasdetiendaLabel_categoria1}" for="categoria1" />
+                    <h:selectOneMenu id="categoria1" value="#{categoriasdetiendaController.selected.categoria1}" title="#{bundle.EditCategoriasdetiendaTitle_categoria1}" required="true" requiredMessage="#{bundle.EditCategoriasdetiendaRequiredMessage_categoria1}">
+                        <f:selectItems value="#{categoriaController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditCategoriasdetiendaLabel_tienda1}" for="tienda1" />
+                    <h:selectOneMenu id="tienda1" value="#{categoriasdetiendaController.selected.tienda1}" title="#{bundle.EditCategoriasdetiendaTitle_tienda1}" required="true" requiredMessage="#{bundle.EditCategoriasdetiendaRequiredMessage_tienda1}">
+                        <f:selectItems value="#{tiendaController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{categoriasdetiendaController.update}" value="#{bundle.EditCategoriasdetiendaSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditCategoriasdetiendaViewLink}"/>
+                <br />
+                <h:commandLink action="#{categoriasdetiendaController.prepareList}" value="#{bundle.EditCategoriasdetiendaShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditCategoriasdetiendaIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

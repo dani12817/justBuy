@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListHorariotiendaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListHorariotiendaEmpty}" rendered="#{horariotiendaController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{horariotiendaController.items.rowCount > 0}">
+                    <h:outputText value="#{horariotiendaController.pagination.pageFirstItem + 1}..#{horariotiendaController.pagination.pageLastItem + 1}/#{horariotiendaController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{horariotiendaController.previous}" value="#{bundle.Previous} #{horariotiendaController.pagination.pageSize}" rendered="#{horariotiendaController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{horariotiendaController.next}" value="#{bundle.Next} #{horariotiendaController.pagination.pageSize}" rendered="#{horariotiendaController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{horariotiendaController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListHorariotiendaTitle_idhorarioTienda}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idhorarioTienda}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListHorariotiendaTitle_lunes}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.lunes}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListHorariotiendaTitle_martes}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.martes}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListHorariotiendaTitle_miercoles}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.miercoles}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListHorariotiendaTitle_jueves}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.jueves}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListHorariotiendaTitle_viernes}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.viernes}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListHorariotiendaTitle_sabado}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.sabado}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListHorariotiendaTitle_domingo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.domingo}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListHorariotiendaTitle_tienda}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tienda}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{horariotiendaController.prepareView}" value="#{bundle.ListHorariotiendaViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{horariotiendaController.prepareEdit}" value="#{bundle.ListHorariotiendaEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{horariotiendaController.destroy}" value="#{bundle.ListHorariotiendaDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{horariotiendaController.prepareCreate}" value="#{bundle.ListHorariotiendaCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListHorariotiendaIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

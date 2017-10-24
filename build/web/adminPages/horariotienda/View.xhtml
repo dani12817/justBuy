@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewHorariotiendaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewHorariotiendaLabel_idhorarioTienda}"/>
+                    <h:outputText value="#{horariotiendaController.selected.idhorarioTienda}" title="#{bundle.ViewHorariotiendaTitle_idhorarioTienda}"/>
+                    <h:outputText value="#{bundle.ViewHorariotiendaLabel_lunes}"/>
+                    <h:outputText value="#{horariotiendaController.selected.lunes}" title="#{bundle.ViewHorariotiendaTitle_lunes}"/>
+                    <h:outputText value="#{bundle.ViewHorariotiendaLabel_martes}"/>
+                    <h:outputText value="#{horariotiendaController.selected.martes}" title="#{bundle.ViewHorariotiendaTitle_martes}"/>
+                    <h:outputText value="#{bundle.ViewHorariotiendaLabel_miercoles}"/>
+                    <h:outputText value="#{horariotiendaController.selected.miercoles}" title="#{bundle.ViewHorariotiendaTitle_miercoles}"/>
+                    <h:outputText value="#{bundle.ViewHorariotiendaLabel_jueves}"/>
+                    <h:outputText value="#{horariotiendaController.selected.jueves}" title="#{bundle.ViewHorariotiendaTitle_jueves}"/>
+                    <h:outputText value="#{bundle.ViewHorariotiendaLabel_viernes}"/>
+                    <h:outputText value="#{horariotiendaController.selected.viernes}" title="#{bundle.ViewHorariotiendaTitle_viernes}"/>
+                    <h:outputText value="#{bundle.ViewHorariotiendaLabel_sabado}"/>
+                    <h:outputText value="#{horariotiendaController.selected.sabado}" title="#{bundle.ViewHorariotiendaTitle_sabado}"/>
+                    <h:outputText value="#{bundle.ViewHorariotiendaLabel_domingo}"/>
+                    <h:outputText value="#{horariotiendaController.selected.domingo}" title="#{bundle.ViewHorariotiendaTitle_domingo}"/>
+                    <h:outputText value="#{bundle.ViewHorariotiendaLabel_tienda}"/>
+                    <h:outputText value="#{horariotiendaController.selected.tienda}" title="#{bundle.ViewHorariotiendaTitle_tienda}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{horariotiendaController.destroyAndView}" value="#{bundle.ViewHorariotiendaDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewHorariotiendaEditLink}"/>
+                <br />
+                <h:commandLink action="#{horariotiendaController.prepareCreate}" value="#{bundle.ViewHorariotiendaCreateLink}" />
+                <br />
+                <h:commandLink action="#{horariotiendaController.prepareList}" value="#{bundle.ViewHorariotiendaShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewHorariotiendaIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

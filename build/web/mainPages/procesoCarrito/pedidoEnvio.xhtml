@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <link rel="stylesheet" type="text/css" href="resources/css/style.css"/>
+    </head>
+    <ui:composition template="/plantilla.xhtml">
+        <ui:define name="body">
+            <div class="cuentaInfo-container">
+                <div class="cuentaPedidoFormularioEnvio">
+                    <div class="cuentaPedidoProceso">
+                        <h:graphicImage library="images" name="proceso/procesoCarrito.png"/>
+                        <h:graphicImage library="images" name="proceso/arrow.png"/>
+                        <h:graphicImage library="images" name="proceso/procesoDireccion.png"/>
+                        <h:graphicImage library="images" name="proceso/arrow.png"/>
+                        <h:graphicImage library="images" name="proceso/procesoEnvio.png"/>
+                        <h:graphicImage library="images" name="proceso/arrow.png"/>
+                        <h:graphicImage library="images" name="proceso/procesoPagoOFF.png"/>
+                        <h:graphicImage library="images" name="proceso/arrow.png"/>
+                        <h:graphicImage library="images" name="proceso/procesoReviewOFF.png"/>
+                    </div>
+                    <div class="cuentaPedidoContenidoEnvio">
+                        <div class="tituloProceso">
+                            <h2>Elige las Opciones de Envío</h2>
+                        </div>
+                        <div class="direccionPedido">
+                            <div class="elegirDireccionPedido">
+                                <h3>Envío de #{pedidoController.tiendaPedido.nombre}</h3>
+
+                                <p class="enviarA">Enviar a: #{pedidoController.usuarioPedido.nombre}, #{pedidoController.pedidoDireccion.direccion},
+                                    #{pedidoController.pedidoDireccion.ciudad.nombre}, #{pedidoController.pedidoDireccion.provincia.nombre},
+                                    #{pedidoController.pedidoDireccion.codPostal.numero}</p>
+                                <ui:repeat value="#{productoController.carritoDeLaCompra}" var="carritoDeLaCompra">
+                                    <p class="enviarAProducto">
+                                        #{carritoDeLaCompra.prodcuto.nombre}<br />
+                                        #{carritoDeLaCompra.prodcuto.precio}€ - Cantidad: #{carritoDeLaCompra.cantidad}<br />
+                                        #{carritoDeLaCompra.prodcuto.descripcion}<br />
+                                    </p>
+                                </ui:repeat>
+                            </div>
+                            <div class="newDireccionPedido">
+                                <h3>Elige una Opción de Envío</h3>
+                                <h:form id="DireccionPedido">
+                                    <h:selectOneMenu value="#{pedidoController.envioPedido}">
+                                        <f:selectItems value="#{envioController.facade.findPorTiendaTramitar(pedidoController.tiendaPedido)}" var="envio"
+                                                       itemValue="#{envio}" itemLabel="#{envio.nombre} - #{envio.precioEnvio}€"/>
+                                    </h:selectOneMenu><br />
+                                    <br />
+                                    <h:commandButton id="cuentaPedidoButton" value="Elegir este método de envío" action="#{pedidoController.nextPedidoPago(productoController)}"/>
+                                </h:form>
+                            </div>                      
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

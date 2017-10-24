@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewTiendaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewTiendaLabel_idtienda}"/>
+                    <h:outputText value="#{tiendaController.selected.idtienda}" title="#{bundle.ViewTiendaTitle_idtienda}"/>
+                    <h:outputText value="#{bundle.ViewTiendaLabel_nombre}"/>
+                    <h:outputText value="#{tiendaController.selected.nombre}" title="#{bundle.ViewTiendaTitle_nombre}"/>
+                    <h:outputText value="#{bundle.ViewTiendaLabel_logo}"/>
+                    <img src="data:image/jpeg;base64,#{tiendaController.getAvatarImage(tiendaController.selected.logo)}" width="100px"/>
+                    <h:outputText value="#{bundle.ViewTiendaLabel_descripcion}"/>
+                    <h:outputText value="#{tiendaController.selected.descripcion}" title="#{bundle.ViewTiendaTitle_descripcion}"/>
+                    <h:outputText value="#{bundle.ViewTiendaLabel_telefono}"/>
+                    <h:outputText value="#{tiendaController.selected.telefono}" title="#{bundle.ViewTiendaTitle_telefono}"/>
+                    <h:outputText value="#{bundle.ViewTiendaLabel_latitud}"/>
+                    <h:outputText value="#{tiendaController.selected.latitud}" title="#{bundle.ViewTiendaTitle_latitud}"/>
+                    <h:outputText value="#{bundle.ViewTiendaLabel_longitud}"/>
+                    <h:outputText value="#{tiendaController.selected.longitud}" title="#{bundle.ViewTiendaTitle_longitud}"/>
+                    <h:outputText value="#{bundle.ViewTiendaLabel_tiendaActiva}"/>
+                    <h:outputText value="#{tiendaController.selected.tiendaActiva}" title="#{bundle.ViewTiendaTitle_tiendaActiva}"/>
+                    <h:outputText value="#{bundle.ViewTiendaLabel_tipoTienda}"/>
+                    <h:outputText value="#{tiendaController.selected.tipoTienda}" title="#{bundle.ViewTiendaTitle_tipoTienda}"/>
+                    <h:outputText value="#{bundle.ViewTiendaLabel_direccionLinea1}"/>
+                    <h:outputText value="#{tiendaController.selected.direccionLinea1}" title="#{bundle.ViewTiendaTitle_direccionLinea1}"/>
+                    <h:outputText value="#{bundle.ViewTiendaLabel_direccionLinea2}"/>
+                    <h:outputText value="#{tiendaController.selected.direccionLinea2}" title="#{bundle.ViewTiendaTitle_direccionLinea2}"/>
+                    <h:outputText value="#{bundle.ViewTiendaLabel_codPostal}"/>
+                    <h:outputText value="#{tiendaController.selected.codPostal}" title="#{bundle.ViewTiendaTitle_codPostal}"/>
+                    <h:outputText value="#{bundle.ViewTiendaLabel_usuario}"/>
+                    <h:outputText value="#{tiendaController.selected.usuario}" title="#{bundle.ViewTiendaTitle_usuario}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{tiendaController.destroyAndView}" value="#{bundle.ViewTiendaDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewTiendaEditLink}"/>
+                <br />
+                <h:commandLink action="#{tiendaController.prepareCreate}" value="#{bundle.ViewTiendaCreateLink}" />
+                <br />
+                <h:commandLink action="#{tiendaController.prepareList}" value="#{bundle.ViewTiendaShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewTiendaIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

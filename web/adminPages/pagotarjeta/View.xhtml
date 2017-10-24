@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewPagotarjetaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewPagotarjetaLabel_idmetodoPago}"/>
+                    <h:outputText value="#{pagotarjetaController.selected.idmetodoPago}" title="#{bundle.ViewPagotarjetaTitle_idmetodoPago}"/>
+                    <h:outputText value="#{bundle.ViewPagotarjetaLabel_titular}"/>
+                    <h:outputText value="#{pagotarjetaController.selected.titular}" title="#{bundle.ViewPagotarjetaTitle_titular}"/>
+                    <h:outputText value="#{bundle.ViewPagotarjetaLabel_numeroTarjeta}"/>
+                    <h:outputText value="#{pagotarjetaController.selected.numeroTarjeta}" title="#{bundle.ViewPagotarjetaTitle_numeroTarjeta}"/>
+                    <h:outputText value="#{bundle.ViewPagotarjetaLabel_caduca}"/>
+                    <h:outputText value="#{pagotarjetaController.selected.caduca}" title="#{bundle.ViewPagotarjetaTitle_caduca}"/>
+                    <h:outputText value="#{bundle.ViewPagotarjetaLabel_usuario}"/>
+                    <h:outputText value="#{pagotarjetaController.selected.usuario}" title="#{bundle.ViewPagotarjetaTitle_usuario}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{pagotarjetaController.destroyAndView}" value="#{bundle.ViewPagotarjetaDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewPagotarjetaEditLink}"/>
+                <br />
+                <h:commandLink action="#{pagotarjetaController.prepareCreate}" value="#{bundle.ViewPagotarjetaCreateLink}" />
+                <br />
+                <h:commandLink action="#{pagotarjetaController.prepareList}" value="#{bundle.ViewPagotarjetaShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewPagotarjetaIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

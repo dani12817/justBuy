@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditPagotarjetaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditPagotarjetaLabel_idmetodoPago}" for="idmetodoPago" />
+                    <h:inputText id="idmetodoPago" value="#{pagotarjetaController.selected.idmetodoPago}" title="#{bundle.EditPagotarjetaTitle_idmetodoPago}" required="true" requiredMessage="#{bundle.EditPagotarjetaRequiredMessage_idmetodoPago}"/>
+                    <h:outputLabel value="#{bundle.EditPagotarjetaLabel_titular}" for="titular" />
+                    <h:inputText id="titular" value="#{pagotarjetaController.selected.titular}" title="#{bundle.EditPagotarjetaTitle_titular}" required="true" requiredMessage="#{bundle.EditPagotarjetaRequiredMessage_titular}"/>
+                    <h:outputLabel value="#{bundle.EditPagotarjetaLabel_numeroTarjeta}" for="numeroTarjeta" />
+                    <h:inputText id="numeroTarjeta" value="#{pagotarjetaController.selected.numeroTarjeta}" title="#{bundle.EditPagotarjetaTitle_numeroTarjeta}" required="true" requiredMessage="#{bundle.EditPagotarjetaRequiredMessage_numeroTarjeta}"/>
+                    <h:outputLabel value="#{bundle.EditPagotarjetaLabel_caduca}" for="caduca" />
+                    <h:inputText id="caduca" value="#{pagotarjetaController.selected.caduca}" title="#{bundle.EditPagotarjetaTitle_caduca}" required="true" requiredMessage="#{bundle.EditPagotarjetaRequiredMessage_caduca}"/>
+                    <h:outputLabel value="#{bundle.EditPagotarjetaLabel_usuario}" for="usuario" />
+                    <h:selectOneMenu id="usuario" value="#{pagotarjetaController.selected.usuario}" title="#{bundle.EditPagotarjetaTitle_usuario}" required="true" requiredMessage="#{bundle.EditPagotarjetaRequiredMessage_usuario}">
+                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{pagotarjetaController.update}" value="#{bundle.EditPagotarjetaSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditPagotarjetaViewLink}"/>
+                <br />
+                <h:commandLink action="#{pagotarjetaController.prepareList}" value="#{bundle.EditPagotarjetaShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditPagotarjetaIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

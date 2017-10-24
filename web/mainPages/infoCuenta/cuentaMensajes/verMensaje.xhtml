@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <ui:composition template="/plantilla.xhtml">
+        <ui:define name="body">
+            <div class="cuentaInfo-container">
+                <div class="cuentaInfoDiv">       
+
+                    <ui:include src="/mainPages/infoCuenta/cuentaInfoMenuIzquierdo.xhtml"/>
+
+                    <div class="cuentaInfoRight">
+
+                        <div class="cuentaDireccionForm">
+                            <h1 class="cuentaDireccionFormTitle">Asunto: #{mensajeController.mensajeActual.asunto}</h1>
+
+                            <div class="cuentaMensajes">
+                                <div class="cuentaMensajeItem">
+                                    <div class="tiendaMensajesUsuarioVerMensaje">
+                                        <label class="TitleMessage" >Remitente:</label> #{mensajeController.mensajeActual.remitente.nick} (#{mensajeController.mensajeActual.remitente.nombre})
+                                    </div>
+
+                                    <div class="tiendaMensajesAsuntoVerMensaje">
+                                        <label class="TitleMessage" >Destinatario</label> #{mensajeController.mensajeActual.destinatario.nick} (#{mensajeController.mensajeActual.destinatario.nombre})
+                                    </div>
+                                </div>
+
+                                <div class="tiendaMensajesContenidoSeparador"></div>
+
+                                <div class="tiendaMensajesContenidoVerMensaje">
+                                    #{mensajeController.mensajeActual.mensaje}
+                                </div>
+                            </div>
+
+                            <br />
+                            <h:panelGroup rendered="#{mensajeController.responderMensaje}">
+                                <div class="responderMensaje">
+                                    <h:form>
+                                        <h:commandButton id="responderMensaje" value="Responder" 
+                                                         action="#{mensajeController.cargarResponder(mensajeController.mensajeActual.destinatario,
+                                                                   mensajeController.mensajeActual.remitente,mensajeController.mensajeActual.producto)}"/>
+                                    </h:form>
+                                </div>
+                            </h:panelGroup>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

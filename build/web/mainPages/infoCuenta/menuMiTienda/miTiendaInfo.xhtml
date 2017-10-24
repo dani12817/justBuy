@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <head>
+        <link rel="stylesheet" type="text/css" href="resources/css/style.css"/>
+    </head>
+    <ui:composition template="/plantilla.xhtml">
+        <ui:define name="body">
+            <div class="cuentaInfo-container">
+                <div class="cuentaInfoDiv">       
+
+                    <ui:include src="/mainPages/infoCuenta/cuentaInfoMenuIzquierdo.xhtml"/>
+
+                    <div class="cuentaInfoRight">
+                        <div class="cuentaInfoForm">
+                            <h1 class="cuentaInfoFormTitle">Mi Tienda</h1>
+                            <h:form id="solicitarTiendaForm" enctype="multipart/form-data">
+
+                                <div class="cuentaInfoFormLabel">Nombre</div>
+                                <h:inputText id="cuentaInfoNombre" maxlength="50" value="#{tiendaController.miTienda.nombre}" size="5" required="true"/>
+
+                                <div class="cuentaInfoFormLabel">Logo</div>                    
+                                <img src="data:image/jpeg;base64,#{tiendaController.getAvatarImage(tiendaController.miTienda.logo)}" width="100px"/>
+                                <p:fileUpload id="logo" value="#{tiendaController.avatar}" mode="simple"/>
+
+                                <div class="cuentaInfoFormLabel">Descripcion</div>
+                                <h:inputText id="cuentaInfoDescripcion" maxlength="100" value="#{tiendaController.miTienda.descripcion}" size="5" required="true"/>
+
+                                <div class="cuentaInfoFormLabel">Teléfono</div>
+                                <h:inputText id="cuentaInfoTelefono" maxlength="60" value="#{tiendaController.miTienda.telefono}" size="9" required="true"/>
+
+                                <div class="cuentaInfoFormLabel">Latitud</div>
+                                <h:inputText id="cuentaInfoLalitud" maxlength="60" value="#{tiendaController.miTienda.latitud}" size="12" disabled="true"/>
+                                <h:inputText id="Lalitud" style="visibility: hidden" value="#{tiendaController.miTienda.latitud}" required="true"/>
+
+                                <div class="cuentaInfoFormLabel">Longitud</div>
+                                <h:inputText id="cuentaInfoLongitud" maxlength="60" value="#{tiendaController.miTienda.longitud}" size="12" disabled="true"/>
+                                <h:inputText id="Longitud" style="visibility: hidden" value="#{tiendaController.miTienda.longitud}" required="true"/>
+
+                                <div id="googleMap"  style="width:700px;height:500px;border: black"></div>
+
+                                <script language="javascript" type="text/javascript">
+                                    var currentMaker;
+
+                                    function showMap() {
+                                        var numLat = parseFloat(document.getElementById('solicitarTiendaForm:Lalitud').value);
+                                        var numLon = parseFloat(document.getElementById('solicitarTiendaForm:Longitud').value);
+                                        
+                                        var LatLngDeTienda = {lat: numLat, lng: numLon};
+                                        
+                                        var mapProp = {center: LatLngDeTienda, zoom: 14};
+                                        var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+                                        google.maps.event.addListener(map, 'click', function (event) {
+                                            getCoordenadas(event.latLng, map);
+                                        });
+                                        
+                                        currentMaker = new google.maps.Marker({
+                                            position: LatLngDeTienda,
+                                            map: mapProp,
+                                            title: document.getElementById('solicitarTiendaForm:cuentaInfoNombre').innerHTML
+                                        });
+                                        
+                                        // Añadir marcador de Tienda
+                                        currentMaker.setMap(map);
+                                    }
+
+                                    function getCoordenadas(location, map) {
+                                        document.getElementById("solicitarTiendaForm:cuentaInfoLalitud").value = location.lat().toFixed(6);
+                                        document.getElementById("solicitarTiendaForm:Lalitud").value = location.lat().toFixed(6);
+                                        document.getElementById("solicitarTiendaForm:cuentaInfoLongitud").value = location.lng().toFixed(6);
+                                        document.getElementById("solicitarTiendaForm:Longitud").value = location.lng().toFixed(6);
+                                        var marker = new google.maps.Marker({position: location, draggable: true});
+                                        if (currentMaker !== null) {
+                                            currentMaker.setMap(null);
+                                        }
+                                        marker.setMap(map);
+                                        currentMaker = marker;
+
+                                        currentMaker.addListener('mouseup', function () {
+                                            document.getElementById("coordenadasText").value = currentMaker.getPosition().lat().toFixed(6) + "," + currentMaker.getPosition().lng().toFixed(6);
+                                        });
+                                    }
+                                </script>
+
+                                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQqmkypDVJy_NTSKOmLsoEXMsKcffhKuw&amp;callback=showMap"></script><br />
+
+                                <div class="cuentaInfoFormLabel">Dirección</div>
+                                <h:inputText id="cuentaInfoDire1" maxlength="50" value="#{tiendaController.miTienda.direccionLinea1}" size="5" required="true"/><br />
+                                <h:inputText id="cuentaInfoDire2" maxlength="50" value="#{tiendaController.miTienda.direccionLinea2}" size="5" />
+                                
+                                <div class="cuentaInfoFormLabel">Categorías</div>
+                                <h:selectManyListbox value="#{categoriasdetiendaController.listaCategoriasSelecionadas}" style="width: 200px" required="true">
+                                    <f:selectItems value="#{categoriaController.listaDeCategorias()}"/>
+                                </h:selectManyListbox>
+                                <label class="mensajeError">#{categoriasdetiendaController.errorCategorias}</label>
+                                <br /><br />
+                                
+                                <div class="cuentaInfoFormLabel">Cód. Postal</div>
+                                <h:selectOneMenu value="#{tiendaController.numeroPostalTienda}">
+                                    <f:selectItems value="#{tiendaController.montarlistaPropvinciaCiudadCodPostal(provinciaController, ciudadController, codpostalController)}" />
+                                </h:selectOneMenu>
+                                <br /><br />
+
+                                <h:commandButton id="cuentaInfoButton" value="Modificar Tienda" action="#{tiendaController.editarTienda(codpostalController,categoriasdetiendaController)}"/>
+
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

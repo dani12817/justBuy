@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:composition template="/plantilla.xhtml">
+        <ui:define name="body">
+            <div class="cuentaInfo-container">
+                <div class="cuentaInfoDiv">       
+
+                    <ui:include src="/mainPages/infoCuenta/cuentaInfoMenuIzquierdo.xhtml"/>
+
+                    <div class="cuentaInfoRight">
+                        <div class="miTiendaProductosForm">
+                            <h1 class="miTiendaProductosFormTitle">Horario de la Tienda</h1>
+                            <p>Establece el horario de tu tienda.</p>
+                        </div>
+
+                        <c:choose>
+                            <c:when test="#{horariotiendaController.comprobarHorarioCreado(tiendaController.miTienda)}">
+
+                                <div class="miTiendaProductos">
+                                    <div class="miTiendaProductosItem">
+                                        <div class="miTiendaProductosItemDatos">
+                                            <table align="center">
+                                                <tr>
+                                                    <td class="titleDay">Lunes</td><td>#{horariotiendaController.horarioMiTienda.lunes.replaceAll("-", " - ")}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="titleDay">Martes</td><td>#{horariotiendaController.horarioMiTienda.martes.replaceAll("-", " - ")}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="titleDay">Miércoles</td><td>#{horariotiendaController.horarioMiTienda.miercoles.replaceAll("-", " - ")}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="titleDay">Jueves</td><td>#{horariotiendaController.horarioMiTienda.jueves.replaceAll("-", " - ")}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="titleDay">Viernes</td><td>#{horariotiendaController.horarioMiTienda.viernes.replaceAll("-", " - ")}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="titleDay">Sábado</td><td>#{horariotiendaController.horarioMiTienda.sabado.replaceAll("-", " - ")}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="titleDay">Domingo</td><td>#{horariotiendaController.horarioMiTienda.domingo.replaceAll("-", " - ")}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="miTiendaProductosAdd">
+                                    <h:form id="HorarioEditItem">
+                                        <h:commandButton id="editarHorario" value="Editar el Horario de la Tienda" action="#{horariotiendaController.cargarHorario(false)}"/>
+                                    </h:form>
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+                                <div class="miTiendaHorario">
+                                    <h3>Actualmente no se ha establecido ningún horario para la tienda</h3>
+                                    <h:form id="HorarioNewItem">
+                                        <h:commandButton id="crearHorario" value="Establecer el Horario de la Tienda" action="#{horariotiendaController.cargarHorario(true)}"/>
+                                    </h:form>
+                                </div>
+                            </c:otherwise>
+                        </c:choose>
+                    </div>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditTiendaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form enctype="multipart/form-data">
+                <h:panelGrid columns="3">
+                    <h:outputLabel value="#{bundle.EditTiendaLabel_idtienda}" for="idtienda" />
+                    <h:inputText id="idtienda" value="#{tiendaController.selected.idtienda}" title="#{bundle.EditTiendaTitle_idtienda}" required="true" requiredMessage="#{bundle.EditTiendaRequiredMessage_idtienda}"/>
+                    <label></label>
+                    <h:outputLabel value="#{bundle.EditTiendaLabel_nombre}" for="nombre" />
+                    <h:inputText id="nombre" value="#{tiendaController.selected.nombre}" title="#{bundle.EditTiendaTitle_nombre}" required="true" requiredMessage="#{bundle.EditTiendaRequiredMessage_nombre}"/>
+                    <label></label>
+                    <h:outputLabel value="#{bundle.EditTiendaLabel_logo}" for="logo" />
+                    <img src="data:image/jpeg;base64,#{tiendaController.getAvatarImage(tiendaController.selected.logo)}" width="100px"/>
+                    <p:fileUpload id="logo" value="#{tiendaController.avatar}" mode="simple"/>
+                    <h:outputLabel value="#{bundle.EditTiendaLabel_descripcion}" for="descripcion" />
+                    <h:inputText id="descripcion" value="#{tiendaController.selected.descripcion}" title="#{bundle.EditTiendaTitle_descripcion}" required="true" requiredMessage="#{bundle.EditTiendaRequiredMessage_descripcion}"/>
+                    <label></label>
+                    <h:outputLabel value="#{bundle.EditTiendaLabel_telefono}" for="telefono" />
+                    <h:inputText id="telefono" value="#{tiendaController.selected.telefono}" title="#{bundle.EditTiendaTitle_telefono}" required="true" requiredMessage="#{bundle.EditTiendaRequiredMessage_telefono}"/>
+                    <label></label>
+                    <h:outputLabel value="#{bundle.EditTiendaLabel_latitud}" for="latitud" />
+                    <h:inputText id="latitud" value="#{tiendaController.selected.latitud}" title="#{bundle.EditTiendaTitle_latitud}" required="true" requiredMessage="#{bundle.EditTiendaRequiredMessage_latitud}"/>
+                    <label></label>
+                    <h:outputLabel value="#{bundle.EditTiendaLabel_longitud}" for="longitud" />
+                    <h:inputText id="longitud" value="#{tiendaController.selected.longitud}" title="#{bundle.EditTiendaTitle_longitud}" required="true" requiredMessage="#{bundle.EditTiendaRequiredMessage_longitud}"/>
+                    <label></label>
+                    <h:outputLabel value="" for="longitud" />
+                    <h:outputLabel value="" for="longitud" />
+                    <div id="googleMap"  style="width:500px;height:400px;border: black"></div>
+                    
+                    <script language="javascript" type="text/javascript">
+                        var currentMaker;
+
+                        function showMap() {
+                                var mapProp = {center:new google.maps.LatLng(38.69857326482206,-0.4813385009765625),zoom:14};
+                                var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+                                google.maps.event.addListener(map, 'click', function(event) {
+                                        getCoordenadas(event.latLng,map);
+                                });
+                        }
+
+                        function getCoordenadas(location,map){
+                                document.getElementById("j_idt12:latitud").value = location.lat().toFixed(6);
+                                document.getElementById("j_idt12:longitud").value = location.lng().toFixed(6);
+                                var marker = new google.maps.Marker({position:location,draggable: true});
+                                if(currentMaker !== null){
+                                        currentMaker.setMap(null);
+                                } 			
+                                marker.setMap(map);
+                                currentMaker = marker;
+
+                                currentMaker.addListener('mouseup', function() {
+                                        document.getElementById("coordenadasText").value = currentMaker.getPosition().lat().toFixed(6)+","+currentMaker.getPosition().lng().toFixed(6);
+                                });
+                        }
+                    </script>
+                    
+                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQqmkypDVJy_NTSKOmLsoEXMsKcffhKuw&amp;callback=showMap"></script>
+                    <h:outputLabel value="#{bundle.EditTiendaLabel_tiendaActiva}" for="tiendaActiva" />
+                    <h:inputText id="tiendaActiva" value="#{tiendaController.selected.tiendaActiva}" title="#{bundle.EditTiendaTitle_tiendaActiva}" required="true" requiredMessage="#{bundle.EditTiendaRequiredMessage_tiendaActiva}"/>
+                    <label></label>
+                    <h:outputLabel value="#{bundle.EditTiendaLabel_tipoTienda}" for="tipoTienda" />
+                    <h:inputText id="tipoTienda" value="#{tiendaController.selected.tipoTienda}" title="#{bundle.EditTiendaTitle_tipoTienda}" required="true" requiredMessage="#{bundle.EditTiendaRequiredMessage_tipoTienda}"/>
+                    <label></label>
+                    <h:outputLabel value="#{bundle.EditTiendaLabel_direccionLinea1}" for="direccionLinea1" />
+                    <h:inputText id="direccionLinea1" value="#{tiendaController.selected.direccionLinea1}" title="#{bundle.EditTiendaTitle_direccionLinea1}" required="true" requiredMessage="#{bundle.EditTiendaRequiredMessage_direccionLinea1}"/>
+                    <label></label>
+                    <h:outputLabel value="#{bundle.EditTiendaLabel_direccionLinea2}" for="direccionLinea2" />
+                    <h:inputText id="direccionLinea2" value="#{tiendaController.selected.direccionLinea2}" title="#{bundle.EditTiendaTitle_direccionLinea2}" />
+                    <label></label>
+                    <h:outputLabel value="#{bundle.CreateTiendaLabel_codPostal}" for="codPostal" />
+                    <h:selectOneMenu id="codPostal" value="#{tiendaController.selected.codPostal}" title="#{bundle.CreateTiendaTitle_codPostal}" required="true" requiredMessage="#{bundle.CreateTiendaRequiredMessage_codPostal}">
+                        <f:selectItems value="#{codpostalController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <label></label>
+                    <h:outputLabel value="#{bundle.EditTiendaLabel_usuario}" for="usuario" />
+                    <h:selectOneMenu id="usuario" value="#{tiendaController.selected.usuario}" title="#{bundle.EditTiendaTitle_usuario}" required="true" requiredMessage="#{bundle.EditTiendaRequiredMessage_usuario}">
+                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{tiendaController.update}" value="#{bundle.EditTiendaSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditTiendaViewLink}"/>
+                <br />
+                <h:commandLink action="#{tiendaController.prepareList}" value="#{bundle.EditTiendaShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditTiendaIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

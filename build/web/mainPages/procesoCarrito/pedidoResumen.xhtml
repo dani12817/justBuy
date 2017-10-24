@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <link rel="stylesheet" type="text/css" href="resources/css/style.css"/>
+    </head>
+    <ui:composition template="/plantilla.xhtml">
+        <ui:define name="body">
+            <div class="cuentaInfo-container">
+                <div class="cuentaPedidoFormularioEnvio">
+                    <div class="cuentaPedidoProceso">
+                        <h:graphicImage library="images" name="proceso/procesoCarrito.png"/>
+                        <h:graphicImage library="images" name="proceso/arrow.png"/>
+                        <h:graphicImage library="images" name="proceso/procesoDireccion.png"/>
+                        <h:graphicImage library="images" name="proceso/arrow.png"/>
+                        <h:graphicImage library="images" name="proceso/procesoEnvio.png"/>
+                        <h:graphicImage library="images" name="proceso/arrow.png"/>
+                        <h:graphicImage library="images" name="proceso/procesoPago.png"/>
+                        <h:graphicImage library="images" name="proceso/arrow.png"/>
+                        <h:graphicImage library="images" name="proceso/procesoReview.png"/>
+                    </div>
+                    <div class="cuentaPedidoContenidoEnvio">
+                        <div class="tituloProceso">
+                            <h2>Revisar tu Pedido</h2>
+                        </div>
+                        <div class="resumenPedido">
+                            <div class="resumenPedidoProducto">
+                                <div class="resumenPedidoEnvioPago">
+                                    <div class="resumenEnvio">
+                                        <label style="font-weight:bold;">Dirección de Envío</label><br />
+                                        #{pedidoController.pedidoDireccion.nombre}<br />
+                                        #{pedidoController.pedidoDireccion.direccionLinea1} #{pedidoController.pedidoDireccion.direccionLinea2}<br />
+                                        #{pedidoController.pedidoDireccion.ciudad.nombre}, #{pedidoController.pedidoDireccion.provincia.nombre} #{pedidoController.pedidoDireccion.codPostal.numero})
+                                    </div>
+                                    <div class="resumenPago">
+                                        <div style="font-weight:bold;">Método de Pago</div>
+                                        [Titular] - [DATOS]
+                                    </div>
+                                    <div class="resumenEnvio">
+                                        <div style="font-weight:bold;">Opción de Envío</div>
+                                        #{pedidoController.envioPedido.nombre} - #{pedidoController.envioPedido.precioEnvio}€
+                                    </div>
+                                    <div class="resumenPedidoProductos">
+                                        <label style="font-weight:bold;">Resumen de los Productos</label>
+                                        <div class="resumenPedidoItems">
+                                            <ui:repeat value="#{productoController.carritoDeLaCompra}" var="carritoDeLaCompra">
+                                                <div class="resumenPedidoItem">
+                                                    <div class="resumenPedidoLogo">
+                                                        <img class="logoProductoResumen" src="data:image/jpeg;base64,#{productoController.getAvatarImage(carritoDeLaCompra.prodcuto.imagen)}"/>
+                                                    </div>
+                                                    <div class="resumenPedidoDatos">
+                                                        #{carritoDeLaCompra.prodcuto.nombre}<br />
+                                                        #{carritoDeLaCompra.prodcuto.precio}€ - Cantidad: #{carritoDeLaCompra.cantidad}<br />
+                                                        #{carritoDeLaCompra.prodcuto.descripcion}<br />
+                                                    </div>
+                                                </div>
+                                            </ui:repeat>
+                                        </div>
+                                    </div>
+                                </div>                  
+                            </div>
+                            <div class="resumenPedidoPrecio">
+                                <h:form id="tramitarPedido">
+                                    <h:commandButton id="tramitarPedidoButton" value="Tramitar Pedido" 
+                                                     action="#{pedidoController.tramitarPedido(productoController.carritoDeLaCompra,productoController.totalDelCarrito,lineapedidoController,productoController)}"/>
+                                </h:form>
+                                <h3>Confirmación del Pedido</h3>
+                                <div class="subtotalResumen">
+                                    <div>Productos:</div><div class="rightPedidoPrecio">EUR #{productoController.calcularTotalDelCarrito()}</div>
+                                    <div>Envío:</div><div class="rightPedidoPrecio">EUR #{productoController.envioElegido.precioEnvio}</div>
+                                </div>
+                                <br />
+                                <div class="totalResumen">
+                                    <div>Total:</div><div class="rightPedidoPrecio">EUR #{productoController.totalDelCarrito}</div>
+                                </div>
+                                El total del pedido incluye el IVA.
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

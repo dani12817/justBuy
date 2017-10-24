@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <head>
+        <link rel="stylesheet" type="text/css" href="resources/css/style.css"/>
+    </head>
+
+    <h:panelGroup rendered="#{productoController.envioElegido == null}">
+        #{productoController.setEnvioElegido(envioController.facade.findUnEnvioPorTienda(tiendaController.tiendaSeleccionada))}
+    </h:panelGroup>
+    
+    <ui:composition template="/plantilla.xhtml">
+        <ui:define name="body">
+            <div class="tienda-result-container">
+                <div class="datos-tienda-result-container">
+                    <ui:include src="/mainPages/menusDatosTienda/menuSuperior.xhtml"/>
+                </div>
+
+                <li class="body-tienda-result-container">			
+                    <ui:include src="/mainPages/menusDatosTienda/categoriaTienda.xhtml"/> 
+
+                    <div class="tienda-result-container-middle">
+                        <ul class="tienda-data-menu">
+                            <li class="tienda-data-menu-item"><a href="datosTienda.xhtml">Info</a></li>
+                            <li class="tienda-data-menu-item"><a href="productosTienda.xhtml">Productos</a></li>
+                            <li class="tienda-data-menu-item selectedTiendaDataList"><span>Opiniones</span></li>
+                        </ul>					
+                        <div class="tienda-data-info-opinion">
+                            <div class="opinionesGenerales">
+                                <div class="opinionesGeneralesTitle">#{valoracionController.listaValoracionTienda.size()} valoracione[s] de #{categoriasDeTienda.categoria1.nombre}</div>
+                                <div class="opinionesGeneralDiv">
+                                    <div class="opinionesGeneralesEstrella">
+                                        <br /><br /><br />
+                                        <p:rating value="#{valoracionController.getMediaDeValoracion(tiendaController.tiendaSeleccionada)}" readonly="true" stars="6"/>
+                                    </div>
+                                    <div class="opinionesEstrellas">
+                                        #{valoracionController.facade.getValoraciones6(tiendaController.tiendaSeleccionada)} <h:graphicImage library="images" name="estrella.png"/><br />
+                                        #{valoracionController.facade.getValoraciones5(tiendaController.tiendaSeleccionada)} <h:graphicImage library="images" name="estrella.png"/><br />
+                                        #{valoracionController.facade.getValoraciones4(tiendaController.tiendaSeleccionada)} <h:graphicImage library="images" name="estrella.png"/><br />
+                                        #{valoracionController.facade.getValoraciones3(tiendaController.tiendaSeleccionada)} <h:graphicImage library="images" name="estrella.png"/><br />
+                                        #{valoracionController.facade.getValoraciones2(tiendaController.tiendaSeleccionada)} <h:graphicImage library="images" name="estrella.png"/><br />
+                                        #{valoracionController.facade.getValoraciones1(tiendaController.tiendaSeleccionada)} <h:graphicImage library="images" name="estrella.png"/></div>
+                                </div>
+                            </div>
+                            <ui:repeat value="#{valoracionController.listaValoracionTienda}" var="opinion">
+                                <div class="opinionesDataItem">
+                                    <div class="opinionesData">
+                                        <div class="opinionesDataNick">#{opinion.usuario.nick}</div>
+                                        <div class="opinionesDataFecha">#{opinion.fechaConFormato}</div>
+                                    </div>
+                                    <div class="opinionesDataEstrellas"><p:rating value="#{opinion.puntuacion}" readonly="true" stars="6"/></div><br />
+                                    <div class="opinionesDataCoemntario">#{opinion.texto}</div>
+                                </div>
+                            </ui:repeat>
+                        </div>
+                    </div>
+
+                    <ui:include src="/mainPages/menusDatosTienda/carritoMenu.xhtml"/>   
+
+                </li>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

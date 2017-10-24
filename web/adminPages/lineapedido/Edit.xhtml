@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditLineapedidoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditLineapedidoLabel_idlineaPedido}" for="idlineaPedido" />
+                    <h:inputText id="idlineaPedido" value="#{lineapedidoController.selected.idlineaPedido}" title="#{bundle.EditLineapedidoTitle_idlineaPedido}" required="true" requiredMessage="#{bundle.EditLineapedidoRequiredMessage_idlineaPedido}"/>
+                    <h:outputLabel value="#{bundle.EditLineapedidoLabel_cantidad}" for="cantidad" />
+                    <h:inputText id="cantidad" value="#{lineapedidoController.selected.cantidad}" title="#{bundle.EditLineapedidoTitle_cantidad}" required="true" requiredMessage="#{bundle.EditLineapedidoRequiredMessage_cantidad}"/>
+                    <h:outputLabel value="#{bundle.EditLineapedidoLabel_pedido}" for="pedido" />
+                    <h:selectOneMenu id="pedido" value="#{lineapedidoController.selected.pedido}" title="#{bundle.EditLineapedidoTitle_pedido}" required="true" requiredMessage="#{bundle.EditLineapedidoRequiredMessage_pedido}">
+                        <f:selectItems value="#{pedidoController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditLineapedidoLabel_producto}" for="producto" />
+                    <h:selectOneMenu id="producto" value="#{lineapedidoController.selected.producto}" title="#{bundle.EditLineapedidoTitle_producto}" required="true" requiredMessage="#{bundle.EditLineapedidoRequiredMessage_producto}">
+                        <f:selectItems value="#{productoController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{lineapedidoController.update}" value="#{bundle.EditLineapedidoSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditLineapedidoViewLink}"/>
+                <br />
+                <h:commandLink action="#{lineapedidoController.prepareList}" value="#{bundle.EditLineapedidoShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditLineapedidoIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

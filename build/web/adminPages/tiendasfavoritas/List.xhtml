@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListTiendasfavoritasTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListTiendasfavoritasEmpty}" rendered="#{tiendasfavoritasController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{tiendasfavoritasController.items.rowCount > 0}">
+                    <h:outputText value="#{tiendasfavoritasController.pagination.pageFirstItem + 1}..#{tiendasfavoritasController.pagination.pageLastItem + 1}/#{tiendasfavoritasController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{tiendasfavoritasController.previous}" value="#{bundle.Previous} #{tiendasfavoritasController.pagination.pageSize}" rendered="#{tiendasfavoritasController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{tiendasfavoritasController.next}" value="#{bundle.Next} #{tiendasfavoritasController.pagination.pageSize}" rendered="#{tiendasfavoritasController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{tiendasfavoritasController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTiendasfavoritasTitle_tiendasFavoritasBoolean}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tiendasFavoritasBoolean}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTiendasfavoritasTitle_tienda1}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tienda1}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTiendasfavoritasTitle_usuario1}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.usuario1}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{tiendasfavoritasController.prepareView}" value="#{bundle.ListTiendasfavoritasViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{tiendasfavoritasController.prepareEdit}" value="#{bundle.ListTiendasfavoritasEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{tiendasfavoritasController.destroy}" value="#{bundle.ListTiendasfavoritasDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{tiendasfavoritasController.prepareCreate}" value="#{bundle.ListTiendasfavoritasCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListTiendasfavoritasIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListTiendaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListTiendaEmpty}" rendered="#{tiendaController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{tiendaController.items.rowCount > 0}">
+                    <h:outputText value="#{tiendaController.pagination.pageFirstItem + 1}..#{tiendaController.pagination.pageLastItem + 1}/#{tiendaController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{tiendaController.previous}" value="#{bundle.Previous} #{tiendaController.pagination.pageSize}" rendered="#{tiendaController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{tiendaController.next}" value="#{bundle.Next} #{tiendaController.pagination.pageSize}" rendered="#{tiendaController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{tiendaController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTiendaTitle_idtienda}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idtienda}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTiendaTitle_nombre}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombre}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTiendaTitle_logo}"/>
+                            </f:facet>
+                            <img src="data:image/jpeg;base64,#{tiendaController.getAvatarImage(item.logo)}" width="100px"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTiendaTitle_descripcion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.descripcion}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTiendaTitle_telefono}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.telefono}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTiendaTitle_latitud}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.latitud}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTiendaTitle_longitud}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.longitud}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTiendaTitle_tiendaActiva}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tiendaActiva}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTiendaTitle_tipoTienda}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tipoTienda}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTiendaTitle_direccionLinea1}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.direccionLinea1}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTiendaTitle_direccionLinea2}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.direccionLinea2}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTiendaTitle_codPostal}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codPostal}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTiendaTitle_usuario}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.usuario}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{tiendaController.prepareView}" value="#{bundle.ListTiendaViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{tiendaController.prepareEdit}" value="#{bundle.ListTiendaEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{tiendaController.destroy}" value="#{bundle.ListTiendaDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{tiendaController.prepareCreate}" value="#{bundle.ListTiendaCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListTiendaIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <link rel="stylesheet" type="text/css" href="resources/css/style.css"/>
+    </head>
+    <ui:composition template="/plantilla.xhtml">
+        <ui:define name="body">
+            <div class="cuentaInfo-container">
+                <div class="cuentaInfoDiv">       
+
+                    <ui:include src="/mainPages/infoCuenta/cuentaInfoMenuIzquierdo.xhtml"/>
+
+                    <div class="cuentaInfoRight">
+
+                        <div class="cuentaDireccionForm">
+                            <h1 class="cuentaDireccionFormTitle">Editar dirección</h1>
+                            <h:form id="newProductoForm" enctype="multipart/form-data">
+
+                                <div class="cuentaInfoFormLabel">Logo</div>                    
+                                <img src="data:image/jpeg;base64,#{productoController.getAvatarImage(productoController.productoActual.imagen)}" width="100px"/>
+                                <p:fileUpload id="logo" value="#{productoController.avatar}" mode="simple"/>
+
+                                <div class="cuentaInfoFormLabel">Nombre</div>
+                                <h:inputText id="productoNombre" class="cuentaInput" maxlength="40" value="#{productoController.productoActual.nombre}" required="true"/>
+
+                                <div class="cuentaInfoFormLabel">Descripcion</div>
+                                <h:inputTextarea id="productoDescripcion" rows="5" cols="51" class="cuentaInput" value="#{productoController.productoActual.descripcion}" required="true" a:maxlength="100" />
+
+                                <div class="cuentaInfoFormLabel">Precio</div>
+                                <h:inputText id="productoPrecio" class="cuentaInput" value="#{productoController.productoActual.precio}" required="true"/>
+
+                                <div class="cuentaInfoFormLabel">Cantidad</div>
+                                <h:inputText id="productoCantidad" class="cuentaInput" value="#{productoController.productoActual.cantidad}" required="true"/>
+
+                                <div class="cuentaInfoFormLabel">Disponibilidad</div>
+                                <h:selectBooleanCheckbox id="productoDisponibilidad" class="cuentaInput" value="#{productoController.productoDisponibilidad}"/>
+
+                                <div class="cuentaInfoFormLabel">Cod. Postal</div>
+                                <h:selectOneMenu value="#{productoController.productoActual.categoria}">
+                                    <f:selectItems value="#{categoriaController.listaDeCategorias()}" var="categorias" itemValue="#{categorias}" itemLabel="#{categorias.nombre}"/>
+                                </h:selectOneMenu>
+                                <br />
+                                <br />
+
+                                <h:commandButton id="cuentaInfoButton" value="Editar Producto" action="#{productoController.editarProducto()}"/>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

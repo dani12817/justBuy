@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewCodpostalTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewCodpostalLabel_idcodPostal}"/>
+                    <h:outputText value="#{codpostalController.selected.idcodPostal}" title="#{bundle.ViewCodpostalTitle_idcodPostal}"/>
+                    <h:outputText value="#{bundle.ViewCodpostalLabel_numero}"/>
+                    <h:outputText value="#{codpostalController.selected.numero}" title="#{bundle.ViewCodpostalTitle_numero}"/>
+                    <h:outputText value="#{bundle.ViewCodpostalLabel_ciudad}"/>
+                    <h:outputText value="#{codpostalController.selected.ciudad}" title="#{bundle.ViewCodpostalTitle_ciudad}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{codpostalController.destroyAndView}" value="#{bundle.ViewCodpostalDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewCodpostalEditLink}"/>
+                <br />
+                <h:commandLink action="#{codpostalController.prepareCreate}" value="#{bundle.ViewCodpostalCreateLink}" />
+                <br />
+                <h:commandLink action="#{codpostalController.prepareList}" value="#{bundle.ViewCodpostalShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewCodpostalIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

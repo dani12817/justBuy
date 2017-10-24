@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <link rel="stylesheet" type="text/css" href="resources/css/style.css"/>
+    </head>
+    <ui:composition template="/plantilla.xhtml">
+        <ui:define name="body">
+            <div class="cuentaInfo-container">
+                <div class="cuentaPedidoFormularioEnvio">
+                    <div class="cuentaPedidoProceso">
+                        <h:graphicImage library="images" name="proceso/procesoCarrito.png"/>
+                        <h:graphicImage library="images" name="proceso/arrow.png"/>
+                        <h:graphicImage library="images" name="proceso/procesoDireccion.png"/>
+                        <h:graphicImage library="images" name="proceso/arrow.png"/>
+                        <h:graphicImage library="images" name="proceso/procesoEnvio.png"/>
+                        <h:graphicImage library="images" name="proceso/arrow.png"/>
+                        <h:graphicImage library="images" name="proceso/procesoPago.png"/>
+                        <h:graphicImage library="images" name="proceso/arrow.png"/>
+                        <h:graphicImage library="images" name="proceso/procesoReviewOFF.png"/>
+                    </div>
+                    <div class="cuentaPedidoContenidoEnvio">
+                        <div class="tituloProceso">
+                            <h2>Elige la Dirección de Envío</h2>
+                        </div>
+                        <div class="pedidoPago">
+                            <div class="elegirPagoPedido">
+                                <h3>Elige uno de tus Métodos de Pago</h3>
+
+                                <h:selectOneMenu value="#{pedidoController.pagoTargetaPedido}">
+                                    <f:selectItems value="#{pagotarjetaController.facade.buscarPorUsuario(usuarioController.usuarioLogin)}" var="tarjeta"
+                                                   itemValue="#{tarjeta}" itemLabel="#{tarjeta.titular}"/>
+                                </h:selectOneMenu>
+                                <br /><br />
+                                <h:form>
+                                    <h:commandButton id="cuentaInfoButtonTarjeta" value="Usar este Método de Pago" action="#{pedidoController.nextPedidoResumen()}"/>
+                                </h:form>
+
+                                <br />
+
+                                <h:selectOneMenu value="#{pedidoController.pagoPaypalPedido}">
+                                    <f:selectItems value="#{pagopaypalController.facade.buscarPorUsuario(usuarioController.usuarioLogin)}" var="paypal"
+                                                   itemValue="#{paypal}" itemLabel="#{paypal.titular}"/>
+                                </h:selectOneMenu>
+                                <br /><br />
+                                <h:form>
+                                    <h:commandButton id="cuentaInfoButtonPaypal" value="Usar este Método de Pago" action="#{pedidoController.nextPedidoResumen()}"/>
+                                </h:form>
+                            </div>
+
+                            <div id="newPago">
+                                <h3>Crear un nuevo Método de Pago</h3>
+                                <p>Asegúrate de hacer clic en "Usar en este Método de Pago" cuando hayas terminado.</p>
+
+                                <h3>Tarjeta</h3>		
+                                <div id="newTarjeta" class="newDireccionPedido">		
+                                    <h:form>
+                                        <div class="cuentaInfoFormLabel">Titular</div>
+                                        <h:inputText id="cardNombre" class="cuentaInput" maxlength="60" value="#{pedidoController.newPagoTargetaPedido.titular}" required="true"/>
+
+                                        <div class="cuentaInfoFormLabel">Número de la Tarjeta</div>
+                                        <h:inputText id="cardNumero" class="cuentaInput" maxlength="16" value="#{pedidoController.newPagoTargetaPedido.numeroTarjeta}" required="true"/>
+                                        <label class="mensajeError">#{pagotarjetaController.errorNumeroTarjeta}</label>
+
+                                        <div class="cuentaInfoFormLabel">Caduca</div>
+                                        <h:inputText id="cardCaduca" class="cuentaInput" maxlength="5" value="#{pedidoController.newPagoTargetaPedido.caduca}" required="true"/>
+
+                                        <h:commandButton id="cuentaInfoButton" value="Usar este nuevo Método de Pago" action="#{pedidoController.establecerPagoTarjeta(pagotarjetaController)}"/>
+                                    </h:form>
+                                </div>  
+
+                                <h3>Paypal</h3>		
+                                <div id="newPagoPaypal" class="newDireccionPedido">
+                                    <h:form>
+                                        <div class="cuentaInfoFormLabel">Titular</div>
+                                        <h:inputText id="cardNombre" class="cuentaInput" maxlength="60" value="#{pedidoController.newPagoPaypalPedido.titular}" required="true"/>
+
+                                        <div class="cuentaInfoFormLabel">E-mail</div>
+                                        <h:inputText id="cardMail" class="cuentaInput" maxlength="80" value="#{pedidoController.newPagoPaypalPedido.mail}" required="true"/>
+                                        <h:commandButton id="cuentaInfoButton" value="Usar este nuevo Método de Pago" action="#{pedidoController.establecerPayPal(pagopaypalController)}"/>
+                                    </h:form>
+                                </div>   
+                            </div>	                    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

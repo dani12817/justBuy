@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateMensajeTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateMensajeLabel_idmensaje}" for="idmensaje" />
+                    <h:inputText id="idmensaje" value="#{mensajeController.selected.idmensaje}" title="#{bundle.CreateMensajeTitle_idmensaje}" required="true" requiredMessage="#{bundle.CreateMensajeRequiredMessage_idmensaje}"/>
+                    <h:outputLabel value="#{bundle.CreateMensajeLabel_asunto}" for="asunto" />
+                    <h:inputText id="asunto" value="#{mensajeController.selected.asunto}" title="#{bundle.CreateMensajeTitle_asunto}" required="true" requiredMessage="#{bundle.CreateMensajeRequiredMessage_asunto}"/>
+                    <h:outputLabel value="#{bundle.CreateMensajeLabel_mensaje}" for="mensaje" />
+                    <h:inputText id="mensaje" value="#{mensajeController.selected.mensaje}" title="#{bundle.CreateMensajeTitle_mensaje}" required="true" requiredMessage="#{bundle.CreateMensajeRequiredMessage_mensaje}"/>
+                    <h:outputLabel value="#{bundle.CreateMensajeLabel_fecha}" for="fecha" />
+                    <h:inputText id="fecha" value="#{mensajeController.selected.fecha}" title="#{bundle.CreateMensajeTitle_fecha}" required="true" requiredMessage="#{bundle.CreateMensajeRequiredMessage_fecha}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateMensajeLabel_producto}" for="producto" />
+                    <h:selectOneMenu id="producto" value="#{mensajeController.selected.producto}" title="#{bundle.CreateMensajeTitle_producto}" required="true" requiredMessage="#{bundle.CreateMensajeRequiredMessage_producto}">
+                        <f:selectItems value="#{productoController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateMensajeLabel_remitente}" for="remitente" />
+                    <h:selectOneMenu id="remitente" value="#{mensajeController.selected.remitente}" title="#{bundle.CreateMensajeTitle_remitente}" required="true" requiredMessage="#{bundle.CreateMensajeRequiredMessage_remitente}">
+                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateMensajeLabel_destinatario}" for="destinatario" />
+                    <h:selectOneMenu id="destinatario" value="#{mensajeController.selected.destinatario}" title="#{bundle.CreateMensajeTitle_destinatario}" required="true" requiredMessage="#{bundle.CreateMensajeRequiredMessage_destinatario}">
+                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{mensajeController.create}" value="#{bundle.CreateMensajeSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{mensajeController.prepareList}" value="#{bundle.CreateMensajeShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateMensajeIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

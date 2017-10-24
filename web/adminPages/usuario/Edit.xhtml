@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditUsuarioTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form enctype="multipart/form-data">
+                <h:panelGrid columns="3">
+                    <h:outputLabel value="#{bundle.EditUsuarioLabel_nick}" for="nick" />
+                    <h:inputText id="nick" value="#{usuarioController.selected.nick}" title="#{bundle.EditUsuarioTitle_nick}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_nick}"/>
+                    <label></label>
+                    <h:outputLabel value="#{bundle.EditUsuarioLabel_clave}" for="clave" />
+                    <h:inputText id="clave" value="#{usuarioController.selected.clave}" title="#{bundle.EditUsuarioTitle_clave}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_clave}"/>
+                    <label></label>
+                    <h:outputLabel value="#{bundle.EditUsuarioLabel_avatar}" for="avatar" />
+                    <img src="data:image/jpeg;base64,#{usuarioController.getAvatarImage(usuarioController.selected.avatar)}" width="100px"/>
+                    <p:fileUpload id="avatar" value="#{usuarioController.avatar}" mode="simple"/>
+                    <h:outputLabel value="#{bundle.EditUsuarioLabel_nombre}" for="nombre" />
+                    <h:inputText id="nombre" value="#{usuarioController.selected.nombre}" title="#{bundle.EditUsuarioTitle_nombre}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_nombre}"/>
+                    <label></label>
+                    <h:outputLabel value="#{bundle.EditUsuarioLabel_telefono}" for="telefono" />
+                    <h:inputText id="telefono" value="#{usuarioController.selected.telefono}" title="#{bundle.EditUsuarioTitle_telefono}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_telefono}"/>
+                    <label></label>
+                    <h:outputLabel value="#{bundle.EditUsuarioLabel_email}" for="email" />
+                    <h:inputText id="email" value="#{usuarioController.selected.email}" title="#{bundle.EditUsuarioTitle_email}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_email}"/>
+                </h:panelGrid>
+                <h:commandLink action="#{usuarioController.update}" value="#{bundle.EditUsuarioSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditUsuarioViewLink}"/>
+                <br />
+                <h:commandLink action="#{usuarioController.prepareList}" value="#{bundle.EditUsuarioShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditUsuarioIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <head>
+        <link rel="stylesheet" type="text/css" href="resources/css/style.css"/>
+    </head>
+    <ui:composition template="/plantilla.xhtml">
+        <ui:define name="body">
+            <div class="cuentaInfo-container">
+                <div class="cuentaInfoDiv">       
+
+                    <ui:include src="/mainPages/infoCuenta/cuentaInfoMenuIzquierdo.xhtml"/>
+
+                    <div class="cuentaInfoRight">
+
+                        <div class="cuentaDireccionForm">
+                            <h1 class="cuentaDireccionFormTitle">Libreta de direcciones</h1>
+                            <p>Crea y guarda direcciones de entrega para hacer tus pedidos fácilmente.</p>
+
+                            <h:panelGroup rendered="#{direccionController.isListaDireccionesVacia(usuarioController.usuarioLogin)}">
+                                <div class="cuentaDireccion">
+                                    <div class="cuentaDireccionItem">
+                                        <label class="noHayElemntosMensaje">Actualmente no hay ninguna dirección creada.</label>
+                                    </div>
+                                </div>
+                            </h:panelGroup>
+
+                            <ui:repeat value="#{direccionController.direccionesUsuario}" var="direccion">
+                                <div class="cuentaDireccion">
+                                    <div class="cuentaDireccionItem">
+                                        <div class="cuentaDireccionItemDatos">
+                                            <p>#{direccion.nombre}</p>
+                                            <p>#{direccion.direccionLinea1} #{direccion.direccionLinea2}</p>
+                                            <p>#{direccion.codPostal.ciudad.nombre}, #{direccion.codPostal.ciudad.provincia.nombre}, #{direccion.codPostal.numero}</p>
+                                        </div>
+                                        <div class="cuentaDireccionItemAcciones">
+                                            <h:form id="AddressListItem">
+                                                <h:commandButton image="/justBuy-danielLealPerez/javax.faces.resource/edit.png.xhtml?ln=images" action="#{direccionController.cargarEditarDireccion(direccion.iddireccion)}"/>
+                                                <h:commandButton image="/justBuy-danielLealPerez/javax.faces.resource/delete.png.xhtml?ln=images" action="#{direccionController.facade.remove(direccion)}"/>
+                                            </h:form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ui:repeat>
+                        </div>
+
+                        <div class="cuentaDireccionAdd">
+                            <div class="cuentaDireccionAddNueva">
+                                <h:form id="AddressNewItem">
+                                    <h:commandButton image="/justBuy-danielLealPerez/javax.faces.resource/direccion-icon.png.xhtml?ln=images" action="#{direccionController.cargarCrearDireccion}"/>
+                                    <br />Añadir Direccion
+                                </h:form>
+                            </div>                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

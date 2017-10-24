@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewMensajeTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewMensajeLabel_idmensaje}"/>
+                    <h:outputText value="#{mensajeController.selected.idmensaje}" title="#{bundle.ViewMensajeTitle_idmensaje}"/>
+                    <h:outputText value="#{bundle.ViewMensajeLabel_asunto}"/>
+                    <h:outputText value="#{mensajeController.selected.asunto}" title="#{bundle.ViewMensajeTitle_asunto}"/>
+                    <h:outputText value="#{bundle.ViewMensajeLabel_mensaje}"/>
+                    <h:outputText value="#{mensajeController.selected.mensaje}" title="#{bundle.ViewMensajeTitle_mensaje}"/>
+                    <h:outputText value="#{bundle.ViewMensajeLabel_fecha}"/>
+                    <h:outputText value="#{mensajeController.selected.fecha}" title="#{bundle.ViewMensajeTitle_fecha}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewMensajeLabel_producto}"/>
+                    <h:outputText value="#{mensajeController.selected.producto}" title="#{bundle.ViewMensajeTitle_producto}"/>
+                    <h:outputText value="#{bundle.ViewMensajeLabel_remitente}"/>
+                    <h:outputText value="#{mensajeController.selected.remitente}" title="#{bundle.ViewMensajeTitle_remitente}"/>
+                    <h:outputText value="#{bundle.ViewMensajeLabel_destinatario}"/>
+                    <h:outputText value="#{mensajeController.selected.destinatario}" title="#{bundle.ViewMensajeTitle_destinatario}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{mensajeController.destroyAndView}" value="#{bundle.ViewMensajeDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewMensajeEditLink}"/>
+                <br />
+                <h:commandLink action="#{mensajeController.prepareCreate}" value="#{bundle.ViewMensajeCreateLink}" />
+                <br />
+                <h:commandLink action="#{mensajeController.prepareList}" value="#{bundle.ViewMensajeShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewMensajeIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

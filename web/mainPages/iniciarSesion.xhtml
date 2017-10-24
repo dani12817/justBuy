@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <head>
+        <link rel="stylesheet" type="text/css" href="resources/css/style.css"/>
+    </head>
+    <ui:composition template="/plantilla.xhtml">
+        <ui:define name="body">
+            <div class="iniciarSesion-container">
+                <div class="iniciarSesionForm">
+                    <h:form id="iniciarSesionForm">
+                        <h1 class="iniciarSesionFormTitle">Inicia sesión</h1>
+                        <h:inputText id="iniciarSesionNickMail" value="#{usuarioController.usuarioNick}" size="5" maxlength="15" required="true"/>
+                        <h:inputSecret id="iniciarSesionPassword"  value="#{usuarioController.usuarioPass}" size="5" maxlength="25" required="true"/>
+                        <br /><label class="mensajeError">#{usuarioController.error}</label>
+                        <h:commandButton id="iniciarSesionButton" value="Iniciar Sesión" action="#{usuarioController.loginNick(tiendaController)}"/>
+                        <p>¿Nuevo en Just Buy? <a href="registroUsuario.xhtml">Crear cuenta</a></p>
+                        <p style="text-align:justify">Al hacer clic en Crear cuenta aceptas los <a>Términos y Condiciones</a>, <a>Pólitica de Privicidad</a> y la <a>Pólitica de Cookies</a> de Just Buy.</p>
+                    </h:form>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

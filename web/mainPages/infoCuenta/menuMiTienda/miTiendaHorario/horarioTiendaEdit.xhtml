@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/plantilla.xhtml">
+        <ui:define name="body">
+            <div class="cuentaInfo-container">
+                <div class="cuentaInfoDiv">       
+
+                    <ui:include src="/mainPages/infoCuenta/cuentaInfoMenuIzquierdo.xhtml"/>
+
+                    <div class="cuentaInfoRight">
+
+                        <div class="cuentaDireccionForm">
+                            <h1 class="cuentaDireccionFormTitle">Crear Horario</h1>
+                            <h:form id="newProductoForm">
+                                <div class="horarioDia">
+                                    <div class="horarioInfoFormLabel">Lunes</div>
+                                    <div><h:inputText class="horarioInput" maxlength="5" value="#{horariotiendaController.lunes}"/></div>
+                                    <div> - </div>
+                                    <div><h:inputText class="horarioInput" maxlength="5" value="#{horariotiendaController.lunesC}"/></div>
+                                    <div><h:selectBooleanCheckbox value="#{horariotiendaController.lunesCerrado}"/> Cerrado</div>
+                                </div>
+                                
+                                <div class="horarioDia">
+                                    <div class="horarioInfoFormLabel">Martes</div>
+                                    <div><h:inputText class="horarioInput" maxlength="5" value="#{horariotiendaController.martes}"/></div>
+                                    <div> - </div>
+                                    <div><h:inputText class="horarioInput" maxlength="5" value="#{horariotiendaController.martesC}"/></div>
+                                    <div><h:selectBooleanCheckbox value="#{horariotiendaController.martesCerrado}"/> Cerrado</div>
+                                </div>
+                                
+                                <div class="horarioDia">
+                                    <div class="horarioInfoFormLabel">Miércoles</div>
+                                    <div><h:inputText class="horarioInput" maxlength="5" value="#{horariotiendaController.miercoles}"/></div>
+                                    <div> - </div>
+                                    <div><h:inputText class="horarioInput" maxlength="5" value="#{horariotiendaController.miercolesC}"/></div>
+                                    <div><h:selectBooleanCheckbox value="#{horariotiendaController.miercolesCerrado}"/> Cerrado</div>
+                                </div>
+                                
+                                <div class="horarioDia">
+                                    <div class="horarioInfoFormLabel">Jueves</div>
+                                    <div><h:inputText class="horarioInput" maxlength="5" value="#{horariotiendaController.jueves}"/></div>
+                                    <div> - </div>
+                                    <div><h:inputText class="horarioInput" maxlength="5" value="#{horariotiendaController.juevesC}"/></div>
+                                    <div><h:selectBooleanCheckbox value="#{horariotiendaController.juevesCerrado}"/> Cerrado</div>
+                                </div>
+                                
+                                <div class="horarioDia">
+                                    <div class="horarioInfoFormLabel">Viernes</div>
+                                    <div><h:inputText class="horarioInput" maxlength="5" value="#{horariotiendaController.viernes}"/></div>
+                                    <div> - </div>
+                                    <div><h:inputText class="horarioInput" maxlength="5" value="#{horariotiendaController.viernesC}"/></div>
+                                    <div><h:selectBooleanCheckbox value="#{horariotiendaController.viernesCerrado}"/> Cerrado</div>
+                                </div>
+                                
+                                <div class="horarioDia">
+                                    <div class="horarioInfoFormLabel">Sábado</div>
+                                    <div><h:inputText class="horarioInput" maxlength="5" value="#{horariotiendaController.sabado}"/></div>
+                                    <div> - </div>
+                                    <div><h:inputText class="horarioInput" maxlength="5" value="#{horariotiendaController.sabadoC}"/></div>
+                                    <div><h:selectBooleanCheckbox value="#{horariotiendaController.sabadoCerrado}"/> Cerrado</div>
+                                </div>
+                                
+                                <div class="horarioDia">
+                                    <div class="horarioInfoFormLabel">Domingo</div>
+                                    <div><h:inputText class="horarioInput" maxlength="5" value="#{horariotiendaController.domingo}"/></div>
+                                    <div> - </div>
+                                    <div><h:inputText class="horarioInput" maxlength="5" value="#{horariotiendaController.domingoC}"/></div>
+                                    <div><h:selectBooleanCheckbox value="#{horariotiendaController.domingoCerrado}"/> Cerrado</div>
+                                </div>
+                                
+                                
+                                <br />
+                                <br />
+                                <h:commandButton id="cuentaInfoButton" value="Editar Horario" action="#{horariotiendaController.editarHorarioTienda()}"/>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

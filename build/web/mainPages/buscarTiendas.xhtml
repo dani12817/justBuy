@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/plantilla.xhtml">
+        <ui:define name="body">
+            <div class="search-container">
+                <div class="search-result-container">
+                    <div class="contenedorResultadoBusqueda">
+                        <div class="search-result-title">
+                            <span class="search-title">#{tiendaController.busquedaTiendas.size()} restaurante[s] en #{tiendaController.codPostalBuscar} #{codpostalController.getPorNumPostal(tiendaController.codPostalBuscar)}</span>
+                            <a href="#{request.contextPath}/faces/indexMain.xhtml">cambia de c. postal</a>
+                        </div>
+                        <div class="search-categoria">
+                            <span class="search-title-category">Tipos de Tienda</span>
+                            <ul class="list-category">
+                                <li class="category-all"><input type="checkbox" name="category" value="all" checked="true"/>Todos</li>
+                            </ul>
+                        </div>
+                        <div class="tienda-result">
+                            <div class="tienda-result-orderBy">
+                                <span>Ordenar por: </span>
+                                <select>
+                                    <option value="ORDER1">ORDER1</option>
+                                    <option value="ORDER2">ORDER2</option>
+                                </select>
+                            </div>
+                            <div class="tienda-result-table">
+                                <h:panelGroup rendered="#{tiendaController.busquedaTiendas.size() == 0}">
+                                    <div class="tiendaResultItem"> <h2>No se han encontrado tiendas</h2></div>
+                                </h:panelGroup>
+                                <c:forEach items="#{tiendaController.busquedaTiendas}" var="tienda">
+                                    <div class="tiendaResultItem">
+                                        <div class="tiendaResultLeft">
+                                            <h:form>
+                                                <h:commandLink action="#{tiendaController.cargarTiendaBuscada(tienda, horariotiendaController, envioController,productoController)}">
+                                                    <img style="float: left;" class="logo-tienda-result" src="data:image/jpeg;base64,#{tiendaController.getAvatarImage(tienda.logo)}"/>
+                                                </h:commandLink>
+                                            </h:form>
+                                        </div>
+                                        <div class="tiendaResultMiddle">
+                                            <div class="data-tienda-result-item">
+                                                #{tienda.nombre} <br />
+                                                VALORACION <br />
+                                                <p:rating value="#{valoracionController.getMediaDeValoracion(tienda)}" readonly="true" stars="6"/><br />
+                                                #{tienda.direccionLinea1}<h:panelGroup rendered="#{tienda.direccionLinea2.length() > 0}"> #{tienda.direccionLinea2}</h:panelGroup>, #{tienda.codPostal.numero}, #{tienda.codPostal.ciudad.nombre}
+                                            </div>
+                                        </div>
+                                        <div class="tiendaResultRight">
+                                            <div class="horario-tienda-result-item">
+                                                [RECOMENDADO]<br />
+                                                [IMAGEN ENVIO]<br />
+                                                [COSTE ENVIO]<br />
+                                                #{horariotiendaController.getHorarioTiendaHoy(tienda)}<br />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="separatorResultItem"></div>
+                                </c:forEach>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

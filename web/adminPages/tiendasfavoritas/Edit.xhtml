@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditTiendasfavoritasTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditTiendasfavoritasLabel_tiendasFavoritasBoolean}" for="tiendasFavoritasBoolean" />
+                    <h:inputText id="tiendasFavoritasBoolean" value="#{tiendasfavoritasController.selected.tiendasFavoritasBoolean}" title="#{bundle.EditTiendasfavoritasTitle_tiendasFavoritasBoolean}" />
+                    <h:outputLabel value="#{bundle.EditTiendasfavoritasLabel_tienda1}" for="tienda1" />
+                    <h:selectOneMenu id="tienda1" value="#{tiendasfavoritasController.selected.tienda1}" title="#{bundle.EditTiendasfavoritasTitle_tienda1}" required="true" requiredMessage="#{bundle.EditTiendasfavoritasRequiredMessage_tienda1}">
+                        <f:selectItems value="#{tiendaController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditTiendasfavoritasLabel_usuario1}" for="usuario1" />
+                    <h:selectOneMenu id="usuario1" value="#{tiendasfavoritasController.selected.usuario1}" title="#{bundle.EditTiendasfavoritasTitle_usuario1}" required="true" requiredMessage="#{bundle.EditTiendasfavoritasRequiredMessage_usuario1}">
+                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{tiendasfavoritasController.update}" value="#{bundle.EditTiendasfavoritasSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditTiendasfavoritasViewLink}"/>
+                <br />
+                <h:commandLink action="#{tiendasfavoritasController.prepareList}" value="#{bundle.EditTiendasfavoritasShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditTiendasfavoritasIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

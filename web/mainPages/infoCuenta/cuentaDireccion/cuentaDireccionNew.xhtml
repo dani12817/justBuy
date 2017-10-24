@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <link rel="stylesheet" type="text/css" href="resources/css/style.css"/>
+    </head>
+    <ui:composition template="/plantilla.xhtml">
+        <ui:define name="body">
+            <div class="cuentaInfo-container">
+                <div class="cuentaInfoDiv">       
+
+                    <ui:include src="/mainPages/infoCuenta/cuentaInfoMenuIzquierdo.xhtml"/>
+
+                    <div class="cuentaInfoRight">
+
+                        <div class="cuentaDireccionForm">
+                            <h1 class="cuentaDireccionFormTitle">Añadir dirección</h1>
+                            <h:form id="newAddressForm">
+                                
+                                <div class="cuentaInfoFormLabel">Nombre</div>
+                                <h:inputText id="addressNombre" class="cuentaInput" maxlength="15" value="#{direccionController.nuevaDireccion.nombre}" required="true"/>
+
+                                <div class="cuentaInfoFormLabel">Direccion</div>
+                                <h:inputText id="addressDireccion1" class="cuentaInput" maxlength="40" value="#{direccionController.nuevaDireccion.direccionLinea1}" required="true"/><br />
+                                <h:inputText id="addressDireccion2" class="cuentaInput" maxlength="40" value="#{direccionController.nuevaDireccion.direccionLinea2}"/>
+
+                                <div class="cuentaInfoFormLabel">Cód. Postal</div>
+                                <h:selectOneMenu value="#{direccionController.numeroPostalDireccionEdit}">
+                                    <f:selectItems value="#{codpostalController.montarlistaPropvinciaCiudadCodPostal(provinciaController, ciudadController)}" />
+                                </h:selectOneMenu>
+                                <br /><br />
+
+                                <h:commandButton id="cuentaInfoButton" value="Añadir Cuenta" action="#{direccionController.crearDireccion(codpostalController,usuarioController.usuarioLogin)}"/>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

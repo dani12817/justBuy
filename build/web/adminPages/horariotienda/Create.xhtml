@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateHorariotiendaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateHorariotiendaLabel_idhorarioTienda}" for="idhorarioTienda" />
+                    <h:inputText id="idhorarioTienda" value="#{horariotiendaController.selected.idhorarioTienda}" title="#{bundle.CreateHorariotiendaTitle_idhorarioTienda}" required="true" requiredMessage="#{bundle.CreateHorariotiendaRequiredMessage_idhorarioTienda}"/>
+                    <h:outputLabel value="#{bundle.CreateHorariotiendaLabel_lunes}" for="lunes" />
+                    <h:inputText id="lunes" value="#{horariotiendaController.selected.lunes}" title="#{bundle.CreateHorariotiendaTitle_lunes}" required="true" requiredMessage="#{bundle.CreateHorariotiendaRequiredMessage_lunes}"/>
+                    <h:outputLabel value="#{bundle.CreateHorariotiendaLabel_martes}" for="martes" />
+                    <h:inputText id="martes" value="#{horariotiendaController.selected.martes}" title="#{bundle.CreateHorariotiendaTitle_martes}" required="true" requiredMessage="#{bundle.CreateHorariotiendaRequiredMessage_martes}"/>
+                    <h:outputLabel value="#{bundle.CreateHorariotiendaLabel_miercoles}" for="miercoles" />
+                    <h:inputText id="miercoles" value="#{horariotiendaController.selected.miercoles}" title="#{bundle.CreateHorariotiendaTitle_miercoles}" required="true" requiredMessage="#{bundle.CreateHorariotiendaRequiredMessage_miercoles}"/>
+                    <h:outputLabel value="#{bundle.CreateHorariotiendaLabel_jueves}" for="jueves" />
+                    <h:inputText id="jueves" value="#{horariotiendaController.selected.jueves}" title="#{bundle.CreateHorariotiendaTitle_jueves}" required="true" requiredMessage="#{bundle.CreateHorariotiendaRequiredMessage_jueves}"/>
+                    <h:outputLabel value="#{bundle.CreateHorariotiendaLabel_viernes}" for="viernes" />
+                    <h:inputText id="viernes" value="#{horariotiendaController.selected.viernes}" title="#{bundle.CreateHorariotiendaTitle_viernes}" required="true" requiredMessage="#{bundle.CreateHorariotiendaRequiredMessage_viernes}"/>
+                    <h:outputLabel value="#{bundle.CreateHorariotiendaLabel_sabado}" for="sabado" />
+                    <h:inputText id="sabado" value="#{horariotiendaController.selected.sabado}" title="#{bundle.CreateHorariotiendaTitle_sabado}" required="true" requiredMessage="#{bundle.CreateHorariotiendaRequiredMessage_sabado}"/>
+                    <h:outputLabel value="#{bundle.CreateHorariotiendaLabel_domingo}" for="domingo" />
+                    <h:inputText id="domingo" value="#{horariotiendaController.selected.domingo}" title="#{bundle.CreateHorariotiendaTitle_domingo}" required="true" requiredMessage="#{bundle.CreateHorariotiendaRequiredMessage_domingo}"/>
+                    <h:outputLabel value="#{bundle.CreateHorariotiendaLabel_tienda}" for="tienda" />
+                    <h:selectOneMenu id="tienda" value="#{horariotiendaController.selected.tienda}" title="#{bundle.CreateHorariotiendaTitle_tienda}" required="true" requiredMessage="#{bundle.CreateHorariotiendaRequiredMessage_tienda}">
+                        <f:selectItems value="#{tiendaController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{horariotiendaController.create}" value="#{bundle.CreateHorariotiendaSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{horariotiendaController.prepareList}" value="#{bundle.CreateHorariotiendaShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateHorariotiendaIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

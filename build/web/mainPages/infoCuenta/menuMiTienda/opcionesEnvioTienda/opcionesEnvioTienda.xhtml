@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <head>
+        <link rel="stylesheet" type="text/css" href="resources/css/style.css"/>
+    </head>
+    <ui:composition template="/plantilla.xhtml">
+        <ui:define name="body">
+            <div class="cuentaInfo-container">
+                <div class="cuentaInfoDiv">       
+
+                    <ui:include src="/mainPages/infoCuenta/cuentaInfoMenuIzquierdo.xhtml"/>
+
+                    <div class="cuentaInfoRight">
+                        <div class="miTiendaEnvioForm">
+                            <h1 class="miTiendaEnvioFormTitle">Lista de opciones de envio</h1>
+                            <p>Crea y guarda opciones de envio de tu tienda.</p>
+                        </div>
+                        
+                        <h:panelGroup rendered="#{envioController.isTiendaConProductos(tiendaController.miTienda)}">
+                            <div class="miTiendaEnvio">
+                                <div class="miTiendaEnvioItem">
+                                    <label class="noHayElemntosMensaje">Actualmente no se ha creado ningún método de envío</label>
+                                </div>
+                            </div>
+                        </h:panelGroup>
+                        
+                        <ui:repeat value="#{envioController.listaEnviosTienda}" var="envio">
+                            <div class="miTiendaEnvio">
+                                <div class="miTiendaEnvioItem">
+                                    <div class="miTiendaEnvioItemDatos">
+                                        <p>#{envio.nombre}</p>
+                                        <p>#{envio.precioEnvio} €</p>
+                                    </div>
+                                    <div class="miTiendaEnvioItemAcciones">
+                                        <h:form id="AddressListItem">
+                                            <h:commandButton image="/justBuy-danielLealPerez/javax.faces.resource/edit.png.xhtml?ln=images" action="#{envioController.cargarEnvio(false,envio)}"/>
+                                            <h:commandButton image="/justBuy-danielLealPerez/javax.faces.resource/delete.png.xhtml?ln=images" action="#{envioController.facade.remove(envio)}"/>
+                                        </h:form>
+                                    </div>
+                                </div>
+                            </div>
+                        </ui:repeat>
+
+
+                        <div class="miTiendaEnvioAdd">
+                            <div class="miTiendaProductosAddNueva">
+                                <h:form id="AddressNewItem">
+                                    <h:commandButton image="/justBuy-danielLealPerez/javax.faces.resource/envio-icon.png.xhtml?ln=images" action="#{envioController.cargarEnvio(true,null)}"/>
+                                    <br />Añadir Opción de Envío
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>
